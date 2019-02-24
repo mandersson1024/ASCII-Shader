@@ -18,12 +18,13 @@ namespace Kalaskod
              *  {
              *      [
              *          {
-             *              "index": 0,
+             *              "id": 0,
              *              "symbol": "#",
-             *              "color": "#ff00ff"
              *              "luminosity": 0.8,
+             *              "pixmap": "#ff00ff"
              *          },
              *          {
+             *              "id": 1
              *              ...
              *          }
              *      ]

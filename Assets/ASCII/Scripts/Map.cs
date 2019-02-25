@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -14,8 +15,6 @@ namespace Kalaskod
         Tileset tileset;
         readonly SpriteRenderer[,] renderers = new SpriteRenderer[width, height];
 
-        int spriteIndex = 0;
-
         void Start()
         {
             tileset = new Tileset("Textures/Spritesheet");
@@ -27,6 +26,8 @@ namespace Kalaskod
                     renderers[x, y] = CreateRendererAt(x, y);
                 }
             }
+
+            PopulateFromCharacterMap(CharacterMapper.sampleCharacterMapSource);
         }
 
         private SpriteRenderer CreateRendererAt(int x, int y)
@@ -43,24 +44,25 @@ namespace Kalaskod
             rend.transform.localPosition = new Vector3((x * 2f) - (width - 1f), (y * 2f) - (height - 1f), 0f);
         }
 
-        void Update()
+        private void PopulateFromCharacterMap(string characterMap)
         {
-            spriteIndex++;
-            spriteIndex %= tileset.Length;
-
             for (int y = 0; y < height; ++y)
             {
                 for (int x = 0; x < width; ++x)
                 {
-                    SpriteRenderer rend = renderers[x, y];
-                    rend.sprite = tileset.GetTile(spriteIndex);
-                    rend.color = Random.ColorHSV();
-                    //transform.localPosition = originalPosition + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f);
-                    rend.transform.localScale = new Vector3(Random.Range(0.5f, 1.5f), Random.Range(0.5f, 1.5f), 0f);
-                    rend.transform.Rotate(0f, 0f, 1f);
+                    char c = characterMap[y*width + x];
+                    int index = CharacterMapper.GetIndex(c);
+                    Sprite sprite = tileset.GetTile(index);
+                    renderers[x,y].sprite = sprite;
                 }
             }
         }
+
+        void Update()
+        {
+            //StressTest.Do(tileset, width, height, renderers);
+        }
+
     }
 }
 

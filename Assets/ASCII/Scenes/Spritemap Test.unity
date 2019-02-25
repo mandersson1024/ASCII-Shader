@@ -179,6 +179,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6570940811123998705, guid: d773dde9898005d4e86f022a21f2635e,
+        type: 3}
+      propertyPath: orthographic size
+      value: 18
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d773dde9898005d4e86f022a21f2635e, type: 3}
 --- !u!1 &1268921328
@@ -210,7 +215,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bbe028f4dc04a442ae745543f72d503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteIndex: 0
 --- !u!4 &1268921330
 Transform:
   m_ObjectHideFlags: 0

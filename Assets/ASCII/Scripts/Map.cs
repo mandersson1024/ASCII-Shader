@@ -41,7 +41,9 @@ namespace Kalaskod
 
         private void SetPosition(int x, int y, SpriteRenderer rend)
         {
-            rend.transform.localPosition = new Vector3((x * 2f) - (width - 1f), (y * 2f) - (height - 1f), 0f);
+            float _x = x - (width / 2) + 0.5f;
+            float _y = -y + (height / 2) - 0.5f;
+            rend.transform.localPosition = new Vector3(_x, _y, 0f);
         }
 
         private void PopulateFromCharacterMap(string characterMap)

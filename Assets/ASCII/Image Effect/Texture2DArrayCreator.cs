@@ -5,6 +5,7 @@ using UnityEditor;
 
 public class Texture2DArrayCreator : MonoBehaviour
 {
+    public Texture2D[] tiles;
 
     [MenuItem("ASCII/Create Luminosity Texture2DArray")]
     static void CreateTexture2DArray()
@@ -31,22 +32,17 @@ public class Texture2DArrayCreator : MonoBehaviour
         AssetDatabase.CreateAsset(array, "Assets/ASCII/Shaders/Luminosity Texture2D Array.asset");
     }
 
-    [MenuItem("ASCII/Create Texture2DArray From Spritesheet")]
+    [MenuItem("ASCII/Create Texture2DArray From List")]
     static void CreateTexture2DArrayFromSpriteSheet()
     {
-        Object[] selection = Selection.objects;
-        Texture2D[] textures = new Texture2D[selection.Length];
-        for (int i = 0; i < textures.Length; i++)
-        {
-            textures[i] = (Texture2D)selection[i];
-        }
+        Texture2D[] tileTextures = GameObject.Find("Texture2DArrayCreator").GetComponent<Texture2DArrayCreator>().tiles;
 
-        Texture2DArray array = new Texture2DArray(textures[0].width, textures[0].height, textures.Length, textures[0].format, false);
-        for (int i = 0; i < textures.Length; i++)
-            array.SetPixels(textures[i].GetPixels(), i);
+        Texture2DArray array = new Texture2DArray(tileTextures[0].width, tileTextures[0].height, tileTextures.Length, tileTextures[0].format, false);
+        for (int i = 0; i < tileTextures.Length; i++)
+            array.SetPixels(tileTextures[i].GetPixels(), i);
 
         array.Apply();
-        AssetDatabase.CreateAsset(array, "Assets/ASCII/Shaders/Spritesheet Texture2D Array.asset");
+        AssetDatabase.CreateAsset(array, "Assets/ASCII/Image Effect/Tile Texture2DArray.asset");
     }
 
 

@@ -31,9 +31,9 @@ public class ImageEffect : MonoBehaviour
         src.filterMode = FilterMode.Point;
 
         Graphics.Blit(src, scaled);
-        material.SetInt("_TileArraySize", 5);
-        material.SetInt("_TilesX", tilesX);
-        material.SetInt("_TilesY", tilesY);
+        //material.SetInt("_TileArraySize", 5);
+        //material.SetInt("_TilesX", tilesX);
+        //material.SetInt("_TilesY", tilesY);
         material.SetTexture("_ScaledTex", scaled);
 
         Graphics.Blit(src, dest, material);

@@ -22,11 +22,43 @@ public class ImageEffect : MonoBehaviour
     void Start()
     {
         material.SetInt("_TileArraySize", 5);
+        tilesX = 16;
+        tilesY = 9;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            tilesX = 16;
+            tilesY = 9;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            tilesX = 32;
+            tilesY = 18;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            tilesX = 64;
+            tilesY = 36;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            tilesX = 128;
+            tilesY = 72;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            tilesX = 256;
+            tilesY = 144;
+        }
+
         material.SetInt("_TilesX", tilesX);
         material.SetInt("_TilesY", tilesY);
         material.SetFloat("_LoResAlpha", loResAlpha);

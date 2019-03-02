@@ -76,8 +76,8 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _HiResAlpha: 0.84
-    - _LoResAlpha: 0.869
+    - _HiResAlpha: 0.9
+    - _LoResAlpha: 0.8
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1

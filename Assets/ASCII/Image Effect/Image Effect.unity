@@ -290,6 +290,11 @@ PrefabInstance:
       propertyPath: m_BackGroundColor.b
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6570940811123998705, guid: d773dde9898005d4e86f022a21f2635e,
+        type: 3}
+      propertyPath: m_ForceIntoRT
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d773dde9898005d4e86f022a21f2635e, type: 3}
 --- !u!1 &800123895 stripped
@@ -313,6 +318,8 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: e1dbf2ec25b26194a8bc68a5dec3db8f, type: 2}
   tilesX: 128
   tilesY: 72
+  loResAlpha: 0.8
+  hiResAlpha: 0.9
 --- !u!20 &800123897 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 6570940811123998705, guid: d773dde9898005d4e86f022a21f2635e,
@@ -484,7 +491,7 @@ VideoPlayer:
   m_AspectRatio: 2
   m_DataSource: 0
   m_PlaybackSpeed: 1
-  m_AudioOutputMode: 2
+  m_AudioOutputMode: 0
   m_TargetAudioSources:
   - {fileID: 0}
   m_DirectAudioVolumes:

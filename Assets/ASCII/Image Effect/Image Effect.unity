@@ -290,9 +290,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: e1dbf2ec25b26194a8bc68a5dec3db8f, type: 2}
-  tilesX: 16
-  tilesY: 9
-  loResAlpha: 0.898
+  tilesX: 64
+  tilesY: 36
+  loResAlpha: 1
   hiResAlpha: 1
 --- !u!20 &800123897 stripped
 Camera:
@@ -414,6 +414,18 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 47ce231fb9589e743ac531dccee4062b, type: 3}
   - {fileID: 2800000, guid: 944e18968c26d2b41a0ede623b3e4a01, type: 3}
   - {fileID: 2800000, guid: cf3d0c891b262fe4cade7c697e62cb45, type: 3}
+  sprites:
+  - {fileID: 21300000, guid: 4a00684412f532f45932f24ec84fdb28, type: 3}
+  - {fileID: 21300002, guid: 4a00684412f532f45932f24ec84fdb28, type: 3}
+  - {fileID: 21300004, guid: 4a00684412f532f45932f24ec84fdb28, type: 3}
+  - {fileID: 21300006, guid: 4a00684412f532f45932f24ec84fdb28, type: 3}
+  - {fileID: 21300008, guid: 4a00684412f532f45932f24ec84fdb28, type: 3}
+  - {fileID: 21300010, guid: 4a00684412f532f45932f24ec84fdb28, type: 3}
+  - {fileID: 21300012, guid: 4a00684412f532f45932f24ec84fdb28, type: 3}
+  - {fileID: 21300014, guid: 4a00684412f532f45932f24ec84fdb28, type: 3}
+  - {fileID: 21300016, guid: 4a00684412f532f45932f24ec84fdb28, type: 3}
+  - {fileID: 21300018, guid: 4a00684412f532f45932f24ec84fdb28, type: 3}
+  - {fileID: 21300020, guid: 4a00684412f532f45932f24ec84fdb28, type: 3}
 --- !u!4 &929848607
 Transform:
   m_ObjectHideFlags: 0

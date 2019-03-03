@@ -6,31 +6,7 @@ using UnityEditor;
 public class Texture2DArrayCreator : MonoBehaviour
 {
     public Texture2D[] tiles;
-
-    [MenuItem("ASCII/Create Luminosity Texture2DArray")]
-    static void CreateTexture2DArray()
-    {
-        const int depth = 5;
-        const int tileSize = 40;
-
-        Texture2DArray array = new Texture2DArray(tileSize, tileSize, depth, TextureFormat.RGB24, false);
-
-        for (int i = 0; i < depth; ++i)
-        {
-            Color[] pixels = new Color[tileSize * tileSize];
-            for (int j = 0; j < tileSize * tileSize; ++j)
-            {
-                byte value = (byte) ((i * 256) / depth);
-                Color32 col = new Color32(value, value, value, 0);
-                pixels[j] = col;
-            }
-            
-            array.SetPixels(pixels, i);
-        }
-
-        array.Apply();
-        AssetDatabase.CreateAsset(array, "Assets/ASCII/Shaders/Luminosity Texture2D Array.asset");
-    }
+    public Sprite[] sprites;
 
     [MenuItem("ASCII/Create Texture2DArray From List")]
     static void CreateTexture2DArrayFromSpriteSheet()
@@ -44,6 +20,27 @@ public class Texture2DArrayCreator : MonoBehaviour
         array.Apply();
         AssetDatabase.CreateAsset(array, "Assets/ASCII/Image Effect/Tile Texture2DArray.asset");
     }
+
+    [MenuItem("ASCII/Create Texture2DArray From Sprites")]
+    static void CreateTexture2DArray()
+    {
+        Sprite[] tileSprites = GameObject.Find("Texture2DArrayCreator").GetComponent<Texture2DArrayCreator>().sprites;
+
+        Texture2DArray array = new Texture2DArray((int)tileSprites[0].textureRect.width, (int)tileSprites[0].textureRect.height, tileSprites.Length, tileSprites[0].texture.format, false);
+        for (int i = 0; i < tileSprites.Length; i++)
+        {
+            var sprite = tileSprites[i];
+            var pixels = sprite.texture.GetPixels((int)sprite.textureRect.x,
+                                        (int)sprite.textureRect.y,
+                                        (int)sprite.textureRect.width,
+                                        (int)sprite.textureRect.height);
+            array.SetPixels(pixels, i);
+        }
+
+        array.Apply();
+        AssetDatabase.CreateAsset(array, "Assets/ASCII/Image Effect/Tile Texture2DArray.asset");
+    }
+
 
 
 }

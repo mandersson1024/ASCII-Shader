@@ -78,7 +78,7 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _HiResAlpha: 1
-    - _LoResAlpha: 0.898
+    - _LoResAlpha: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -86,9 +86,9 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _TileArraySize: 5
-    - _TilesX: 16
-    - _TilesY: 9
+    - _TileArraySize: 11
+    - _TilesX: 64
+    - _TilesY: 36
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:

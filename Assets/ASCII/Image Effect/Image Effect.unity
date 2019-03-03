@@ -290,8 +290,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: e1dbf2ec25b26194a8bc68a5dec3db8f, type: 2}
-  tilesX: 64
-  tilesY: 36
+  tilesX: 16
+  tilesY: 9
   loResAlpha: 1
   hiResAlpha: 1
 --- !u!20 &800123897 stripped

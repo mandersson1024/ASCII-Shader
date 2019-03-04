@@ -10,6 +10,7 @@
 		_TilesY("Tiles Y", int) = 0
 		_LoResAlpha("Lo Res Alpha", Range(0, 1)) = 1
 		_HiResAlpha("Hi Res Alpha", Range(0, 1)) = 1
+		_CharacterBrightness("Character Brightness", Range(0, 10)) = 0
 	}
     SubShader
     {
@@ -52,6 +53,7 @@
 			int _TilesY;
 			float _LoResAlpha;
 			float _HiResAlpha;
+			float _CharacterBrightness;
 
 			/*
 				vec3 rgb2hsv(vec3 c)
@@ -73,6 +75,13 @@
 				}			
 			*/
 
+			float3 brighten(float x)
+			{
+				float b = _CharacterBrightness;
+				x = clamp(x, 0, 1);
+				return 1 - (pow((1-x), (b+1)));
+			}
+
             fixed4 frag (v2f i) : SV_Target
             {
                 fixed4 col = tex2D(_ScaledTex, i.uv);
@@ -82,7 +91,7 @@
 				uvz.x = i.uv.x * _TilesX;
 				uvz.y = i.uv.y * _TilesY;
 				//uvz.z = lum * _TileArraySize;
-				uvz.z = clamp(lum * 3, 0, _TileArraySize) * _TileArraySize; // the 3 is _Brightness
+				uvz.z = brighten(lum) * _TileArraySize;
 
 				fixed4 result = col;
 				//result.rgb = UNITY_SAMPLE_TEX2DARRAY(_Tiles, uvz);

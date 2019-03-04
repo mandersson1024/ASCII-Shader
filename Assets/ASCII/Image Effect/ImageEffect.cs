@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class ImageEffect : MonoBehaviour
 {
+    public Sprite spriteSheet;
     public Material material;
 
     public int tilesX = 64;
@@ -17,13 +18,17 @@ public class ImageEffect : MonoBehaviour
     [Range(0, 1)]
     public float hiResAlpha = 1;
 
+    [Range(0, 10)]
+    public float characterBrightness = 0;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        material.SetInt("_TileArraySize", 5);
-        tilesX = 16;
-        tilesY = 9;
+        //material.SetTexture("_Tiles", spriteSheet.texture); does not work
+        material.SetInt("_TileArraySize", spriteSheet.texture.width / spriteSheet.texture.height);
+        tilesX = 192;
+        tilesY = 108;
     }
 
     // Update is called once per frame
@@ -55,14 +60,15 @@ public class ImageEffect : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            tilesX = 256;
-            tilesY = 144;
+            tilesX = 192;
+            tilesY = 108;
         }
 
         material.SetInt("_TilesX", tilesX);
         material.SetInt("_TilesY", tilesY);
         material.SetFloat("_LoResAlpha", loResAlpha);
         material.SetFloat("_HiResAlpha", hiResAlpha);
+        material.SetFloat("_CharacterBrightness", characterBrightness);
 
         /*
         _MainTex("Texture", 2D) = "white" {}

@@ -289,11 +289,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b1f337befec7584d9111cb5d8433003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteSheet: {fileID: 21300000, guid: 45832bca4f7dbf9419bab5608ffae8eb, type: 3}
   material: {fileID: 2100000, guid: e1dbf2ec25b26194a8bc68a5dec3db8f, type: 2}
-  tilesX: 16
-  tilesY: 9
-  loResAlpha: 1
+  tilesX: 192
+  tilesY: 108
+  loResAlpha: 0.8
   hiResAlpha: 1
+  characterBrightness: 1.8
 --- !u!20 &800123897 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 6570940811123998705, guid: d773dde9898005d4e86f022a21f2635e,

@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/ASCII/Image Effect/Image Effect.unity
+  isLoaded: 1
+  isActive: 1

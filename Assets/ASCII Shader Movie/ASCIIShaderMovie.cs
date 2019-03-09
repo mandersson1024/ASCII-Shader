@@ -4,7 +4,7 @@ using UnityEngine;
 
 [ExecuteInEditMode]
 [RequireComponent(typeof(Camera))]
-public class ImageEffect : MonoBehaviour
+public class ASCIIShaderMovie : MonoBehaviour
 {
     public Sprite spriteSheet;
     public Material material;

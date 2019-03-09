@@ -226,8 +226,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteSheet: {fileID: 21300000, guid: 45832bca4f7dbf9419bab5608ffae8eb, type: 3}
   material: {fileID: 2100000, guid: e1dbf2ec25b26194a8bc68a5dec3db8f, type: 2}
-  tilesX: 192
-  tilesY: 108
+  tilesX: 32
+  tilesY: 18
   loResAlpha: 0.7
   hiResAlpha: 1
   characterBrightness: 1.8
@@ -314,7 +314,7 @@ Transform:
   m_LocalScale: {x: 2.223, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &929848605
 GameObject:
@@ -567,5 +567,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

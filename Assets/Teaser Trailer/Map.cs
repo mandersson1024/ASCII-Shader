@@ -9,10 +9,9 @@ public class Map : MonoBehaviour
 {
     readonly int pixelWidth = 1920;
     readonly int pixelHeight = 1080;
-    readonly int width = 64;
-    readonly int height = 36;
-    readonly int tileSize = 40;
     readonly int pixelsPerUnit = 30;
+
+    public Texture2D tileAtlas;
 
     Tileset tileset;
     Texture2D texture;
@@ -22,24 +21,32 @@ public class Map : MonoBehaviour
 
     void Start()
     {
-        texture = new Texture2D(pixelWidth, pixelHeight, TextureFormat.ARGB32, false);
+        texture = new Texture2D(pixelWidth, pixelHeight, TextureFormat.RGBA32, false);
         texture.FillWithColor(new Color32(250, 158, 51, 255));
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = Sprite.Create(texture, new Rect(0f, 0f, pixelWidth, pixelHeight), new Vector2(0.5f, 0.5f), pixelsPerUnit);
 
-        //tileset = new Tileset("Spritesheet 40");
-        //mapTexture = MapTextureFactory.CreateMapTexture(64, 36, 40, null, null, null); // todo: fill this in
-        //sprite.
+        tileset = new Tileset(tileAtlas);
 
-        for (int y = 0; y < height; ++y)
+        //mapTexture = MapTextureFactory.CreateMapTexture(64, 36, 40, null, null, null); // todo: fill this in
+
+        int i = 0;
+        for (int y = 0; y < 16; ++y)
         {
-            for (int x = 0; x < width; ++x)
+            for (int x = 0; x < 16; ++x)
             {
+                tileset.DrawTile(texture, i, x, y);
+                ++i;
             }
         }
 
         //PopulateFromCharacterMap(CharacterMapper.sampleCharacterMapSource);
+    }
+
+    void CopyTexture(Texture2D src, Texture2D dst, int x, int y)
+    {
+        Graphics.CopyTexture(src, 0, 0, 0, 0, src.width, src.height, dst, 0, 0, x, y);
     }
 
     /*

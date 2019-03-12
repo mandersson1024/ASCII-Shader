@@ -15,14 +15,14 @@ public class MapTextureFactory
         //      a texture of tiles
     }
 
-    static Texture2D CreateMapTexture(Vector2Int mapSize, int tilePixelSize, Texture2D[] tiles, string mapDefinition, Dictionary<char, byte> legend)
+    public static Texture2D CreateMapTexture(int numTilesX, int numTilesY, int tilePixelSize, Texture2D[] tiles, string mapDefinition, Dictionary<char, byte> legend)
     {
         // - Create texture
         Texture2D tex = null;
         
-        for (int y = 0; y < mapSize.y; ++y)
+        for (int y = 0; y < numTilesY; ++y)
         {
-            for (int x = 0; x < mapSize.x; ++x)
+            for (int x = 0; x < numTilesX; ++x)
             {
                 // draw tile at position (SetPixels, I guess)
             }
@@ -31,7 +31,7 @@ public class MapTextureFactory
         return tex;
     }
 
-    static Texture2D CreateMapTexture(Vector2Int numTiles, Texture2D[] tiles, Texture2D mapDefinition, Dictionary<Color32, byte> legend)
+    public static Texture2D CreateMapTexture(Vector2Int numTiles, Texture2D[] tiles, Texture2D mapDefinition, Dictionary<Color32, byte> legend)
     {
         // Do like the string version, but use colors from the mapDefinition texture instead of chars.
         return null;

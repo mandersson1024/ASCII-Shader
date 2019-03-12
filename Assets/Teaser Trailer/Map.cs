@@ -11,9 +11,7 @@ public class Map : MonoBehaviour
     readonly int pixelHeight = 1080;
     readonly int pixelsPerUnit = 30;
 
-    public Texture2D tileAtlas;
-
-    Tileset tileset;
+    public Tileset tileset;
     Texture2D texture;
     Sprite sprite;
 
@@ -27,8 +25,6 @@ public class Map : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = Sprite.Create(texture, new Rect(0f, 0f, pixelWidth, pixelHeight), new Vector2(0.5f, 0.5f), pixelsPerUnit);
 
-        tileset = new Tileset(tileAtlas);
-
         //mapTexture = MapTextureFactory.CreateMapTexture(64, 36, 40, null, null, null); // todo: fill this in
 
         int i = 0;
@@ -36,7 +32,7 @@ public class Map : MonoBehaviour
         {
             for (int x = 0; x < 16; ++x)
             {
-                tileset.DrawTile(texture, i, x, y);
+                tileset.DrawTile(texture, new Vector2Int(x, y), x * tileset.tileSize, (1080 - tileset.tileSize) - y * tileset.tileSize);
                 ++i;
             }
         }

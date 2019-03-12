@@ -1,26 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEditor;
 
-
-public class Tileset
+public class Tileset : ScriptableObject
 {
-    const int screenPixelHeight = 1080;
-    const int tilePixelSize = 64;
-    const int numAtlasTiles = 16;
+    public Texture2D atlas;
+    public int tileSize = 64;
 
-    Texture2D atlas;
-
-    public Tileset(Texture2D atlas)
+    [MenuItem("ASCII/Create/Tileset")]
+    public static void CreateAsset()
     {
-        this.atlas = atlas;
+        ScriptableObjectUtility.CreateAsset<Tileset>();
     }
 
-    public void DrawTile(Texture2D destination, int tileIndex, int x, int y)
+    public void DrawTile(Texture2D destination, Vector2Int tileIndex, int x, int y)
     {
-        int srcX = tileIndex % numAtlasTiles;
-        int srcY = tileIndex / numAtlasTiles;
-        Graphics.CopyTexture(atlas, 0, 0, srcX * tilePixelSize, (atlas.height - tilePixelSize) - srcY * tilePixelSize, tilePixelSize, tilePixelSize, destination, 0, 0, x * tilePixelSize, (screenPixelHeight - tilePixelSize) - (y * tilePixelSize));
+        int tileX = tileIndex.x * tileSize;
+        int tileY = (atlas.height - tileSize) - tileIndex.y * tileSize;
+        Graphics.CopyTexture(atlas, 0, 0, tileX, tileY, tileSize, tileSize, destination, 0, 0, x, y);
     }
 
 }

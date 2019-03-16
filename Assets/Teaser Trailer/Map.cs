@@ -7,8 +7,8 @@ using UnityEngine.Assertions;
 [RequireComponent(typeof(SpriteRenderer))]
 public class Map : MonoBehaviour
 {
-    readonly int pixelWidth = 1920;
-    readonly int pixelHeight = 1080;
+    readonly int pixelWidth = 2560;
+    readonly int pixelHeight = 1440;
     readonly int pixelsPerUnit = 30;
 
     public Tileset tileset;
@@ -27,15 +27,32 @@ public class Map : MonoBehaviour
 
         //mapTexture = MapTextureFactory.CreateMapTexture(64, 36, 40, null, null, null); // todo: fill this in
 
+        /*
         int i = 0;
         for (int y = 0; y < 16; ++y)
         {
             for (int x = 0; x < 16; ++x)
             {
-                tileset.DrawTile(texture, new Vector2Int(x, y), x * tileset.tileSize, (1080 - tileset.tileSize) - y * tileset.tileSize);
+                tileset.DrawTile(texture, i, x * tileset.tilePixelSize, pixelHeight - (y + 1) * tileset.tilePixelSize);
                 ++i;
             }
         }
+        */
+
+        //*
+        int i = 0;
+        for (int y = 0; y < 36; ++y)
+        {
+            for (int x = 0; x < 64; ++x)
+            {
+                char c = CharacterMapper.sampleCharacterMapSource[i];
+                int index = CharacterMapper.GetIndex(c);
+                tileset.DrawTile(texture, index, x * tileset.tilePixelSize, pixelHeight - (y + 1) * tileset.tilePixelSize);
+                ++i;
+            }
+        }
+        //*/
+
 
         //PopulateFromCharacterMap(CharacterMapper.sampleCharacterMapSource);
     }

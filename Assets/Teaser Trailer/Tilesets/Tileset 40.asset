@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Tileset 40
   m_EditorClassIdentifier: 
   atlas: {fileID: 2800000, guid: 632b74cfcefca3e438835bc42ca44b85, type: 3}
-  tileSize: 40
+  tilePixelSize: 40

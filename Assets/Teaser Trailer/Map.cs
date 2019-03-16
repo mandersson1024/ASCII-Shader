@@ -7,28 +7,28 @@ using UnityEngine.Assertions;
 [RequireComponent(typeof(SpriteRenderer))]
 public class Map : MonoBehaviour
 {
-    readonly int pixelWidth = 2560;
-    readonly int pixelHeight = 1440;
-    readonly int pixelsPerUnit = 30;
+    readonly int mapWidthPixels = 1920;
+    readonly int mapHeightPixels = 1080;
+    readonly int pixelsPerUnit = 1;
 
     Tileset tileset;
     public Texture2D tileAtlas;
     public Texture2D scaledTileAtlas;
     public int tileSizePixels = 30;
 
-    Texture2D texture;
-    Sprite sprite;
+    Texture2D mapTexture;
+    readonly Sprite mapSprite;
 
 
     SpriteRenderer spriteRenderer;
 
     void Start()
     {
-        texture = new Texture2D(pixelWidth, pixelHeight, TextureFormat.RGBA32, false);
-        texture.FillWithColor(new Color32(250, 158, 51, 255));
+        mapTexture = new Texture2D(mapWidthPixels, mapHeightPixels, TextureFormat.RGBA32, false);
+        mapTexture.FillWithColor(new Color32(250, 158, 51, 255));
 
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = Sprite.Create(texture, new Rect(0f, 0f, pixelWidth, pixelHeight), new Vector2(0.5f, 0.5f), pixelsPerUnit);
+        spriteRenderer.sprite = Sprite.Create(mapTexture, new Rect(0f, 0f, mapWidthPixels, mapHeightPixels), new Vector2(0.5f, 0.5f), pixelsPerUnit);
 
         scaledTileAtlas = tileAtlas.CloneAndScale(tileSizePixels * 16, tileSizePixels * 16);
         tileset = new Tileset(scaledTileAtlas, tileSizePixels);
@@ -55,7 +55,7 @@ public class Map : MonoBehaviour
             {
                 char c = CharacterMapper.sampleCharacterMapSource[i];
                 int index = CharacterMapper.GetIndex(c);
-                tileset.DrawTile(texture, index, x * tileset.tileSizePixels, pixelHeight - (y + 1) * tileset.tileSizePixels);
+                tileset.DrawTile(mapTexture, index, x * tileset.tileSizePixels, mapHeightPixels - (y + 1) * tileset.tileSizePixels);
                 ++i;
             }
         }

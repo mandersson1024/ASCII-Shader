@@ -278,7 +278,7 @@ PrefabInstance:
     - target: {fileID: 6570940811123998705, guid: d773dde9898005d4e86f022a21f2635e,
         type: 3}
       propertyPath: orthographic size
-      value: 18
+      value: 540
       objectReference: {fileID: 0}
     - target: {fileID: 6570940811123998705, guid: d773dde9898005d4e86f022a21f2635e,
         type: 3}
@@ -396,4 +396,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileAtlas: {fileID: 2800000, guid: 0b6ada07b7de3b847bb941d12d2ac41b, type: 3}
   scaledTileAtlas: {fileID: 0}
-  tileSizePixels: 40
+  tileSizePixels: 30

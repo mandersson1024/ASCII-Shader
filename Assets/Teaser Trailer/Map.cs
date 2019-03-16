@@ -11,9 +11,14 @@ public class Map : MonoBehaviour
     readonly int pixelHeight = 1440;
     readonly int pixelsPerUnit = 30;
 
-    public Tileset tileset;
+    Tileset tileset;
+    public Texture2D tileAtlas;
+    public Texture2D scaledTileAtlas;
+    public int tileSizePixels = 30;
+
     Texture2D texture;
     Sprite sprite;
+
 
     SpriteRenderer spriteRenderer;
 
@@ -25,6 +30,9 @@ public class Map : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = Sprite.Create(texture, new Rect(0f, 0f, pixelWidth, pixelHeight), new Vector2(0.5f, 0.5f), pixelsPerUnit);
 
+        scaledTileAtlas = tileAtlas.CloneAndScale(tileSizePixels * 16, tileSizePixels * 16);
+        tileset = new Tileset(scaledTileAtlas, tileSizePixels);
+        
         //mapTexture = MapTextureFactory.CreateMapTexture(64, 36, 40, null, null, null); // todo: fill this in
 
         /*
@@ -47,7 +55,7 @@ public class Map : MonoBehaviour
             {
                 char c = CharacterMapper.sampleCharacterMapSource[i];
                 int index = CharacterMapper.GetIndex(c);
-                tileset.DrawTile(texture, index, x * tileset.tilePixelSize, pixelHeight - (y + 1) * tileset.tilePixelSize);
+                tileset.DrawTile(texture, index, x * tileset.tileSizePixels, pixelHeight - (y + 1) * tileset.tileSizePixels);
                 ++i;
             }
         }

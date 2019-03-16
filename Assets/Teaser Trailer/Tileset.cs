@@ -1,23 +1,23 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-public class Tileset : ScriptableObject
+public class Tileset
 {
-    public Texture2D atlas;
-    public int tilePixelSize = 64;
+    readonly Texture2D atlas;
+    readonly public int tileSizePixels;
 
-    [MenuItem("ASCII/Create/Tileset")]
-    public static void CreateAsset()
+    public Tileset(Texture2D atlas, int tileSizePixels)
     {
-        ScriptableObjectUtility.CreateAsset<Tileset>();
+        this.atlas = atlas;
+        this.tileSizePixels = tileSizePixels;
     }
 
     public void DrawTile(Texture2D destination, int tileIndex, int x, int y)
     {
-        int tileX = (tileIndex % 16) * tilePixelSize;
-        int tileY = (15 - (tileIndex / 16)) * tilePixelSize;
+        int tileX = (tileIndex % 16) * tileSizePixels;
+        int tileY = (15 - (tileIndex / 16)) * tileSizePixels;
         Debug.Log("tileX=" + tileX + ", tileY=" + tileY);
-        Graphics.CopyTexture(atlas, 0, 0, tileX, tileY, tilePixelSize, tilePixelSize, destination, 0, 0, x, y);
+        Graphics.CopyTexture(atlas, 0, 0, tileX, tileY, tileSizePixels, tileSizePixels, destination, 0, 0, x, y);
     }
 
 }

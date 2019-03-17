@@ -11,7 +11,6 @@ public class TileMap : MonoBehaviour
 
     Tileset tileset;
     public Texture2D tileAtlas;
-    public Vector2Int numTiles = new Vector2Int(64, 36);
     public int tileSizePixels = 30;
 
     Texture2D mapTexture;
@@ -20,27 +19,41 @@ public class TileMap : MonoBehaviour
 
     SpriteRenderer spriteRenderer;
 
-    [Header("Do not edit")]
+    [Header("Debug info")]
+    public Vector2Int numTiles;
     public Vector2Int mapTextureSize;
     public Texture2D scaledTileAtlas;
 
-    void Start()
+    private void Awake()
     {
-        mapTextureSize.Set(numTiles.x * tileSizePixels, numTiles.y * tileSizePixels);
-        mapTexture = new Texture2D(mapTextureSize.x, mapTextureSize.y, TextureFormat.RGBA32, false);
-
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = Sprite.Create(mapTexture, new Rect(0f, 0f, mapTextureSize.x, mapTextureSize.y), new Vector2(0.5f, 0.5f), pixelsPerUnit);
+    }
 
+    private void Start()
+    {
         scaledTileAtlas = tileAtlas.CloneAndScale(tileSizePixels * 16, tileSizePixels * 16);
         tileset = new Tileset(scaledTileAtlas, tileSizePixels);
-        
+
+        mapTexture = CreateTextureFromCharacterMap(CharacterMapper.testMap);
         PopulateFromCharacterMap(CharacterMapper.testMap);
+
+        spriteRenderer.sprite = Sprite.Create(mapTexture, new Rect(0f, 0f, mapTextureSize.x, mapTextureSize.y), new Vector2(0.5f, 0.5f), pixelsPerUnit);
     }
 
     void CopyTexture(Texture2D src, Texture2D dst, int x, int y)
     {
         Graphics.CopyTexture(src, 0, 0, 0, 0, src.width, src.height, dst, 0, 0, x, y);
+    }
+
+    private Texture2D CreateTextureFromCharacterMap(string[] characterMap)
+    {
+        numTiles.x = characterMap[0].Length;
+        numTiles.y = characterMap.Length;
+
+        mapTextureSize.x = numTiles.x * tileSizePixels;
+        mapTextureSize.y = numTiles.y * tileSizePixels;
+
+        return new Texture2D(mapTextureSize.x, mapTextureSize.y, TextureFormat.RGBA32, false);
     }
 
     private void PopulateFromCharacterMap(string[] characterMap)

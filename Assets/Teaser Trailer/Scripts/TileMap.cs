@@ -12,6 +12,7 @@ public class TileMap : MonoBehaviour
     Tileset tileset;
     public Texture2D tileAtlas;
     public int tileSizePixels = 30;
+    public Texture2D mapImage;
 
     Texture2D mapTexture;
     readonly Sprite mapSprite;
@@ -35,7 +36,9 @@ public class TileMap : MonoBehaviour
         tileset = new Tileset(scaledTileAtlas, tileSizePixels);
 
         mapTexture = CreateTextureFromCharacterMap(CharacterMapper.testMap);
-        PopulateFromCharacterMap(CharacterMapper.testMap);
+        //PopulateFromCharacterMap(CharacterMapper.testMap);
+        string[] str = CharacterMapper.FromImage(mapImage);
+        PopulateFromCharacterMap(str);
 
         spriteRenderer.sprite = Sprite.Create(mapTexture, new Rect(0f, 0f, mapTextureSize.x, mapTextureSize.y), new Vector2(0.5f, 0.5f), pixelsPerUnit);
     }

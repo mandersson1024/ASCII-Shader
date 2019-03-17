@@ -12,6 +12,27 @@ public class CharacterMapper
         return index == -1 ? 0 : index;
     }
 
+    public static string[] FromImage(Texture2D image)
+    {
+        string[] str = new string[image.width];
+
+        for (int y = 0; y < image.height; ++y)
+        {
+            for (int x = 0; x < image.width; ++x)
+            {
+                Color32 c = image.GetPixel(x, y);
+
+                // todo: this is crude
+                if (c == Color.white)
+                    str[y] += "#";
+                else
+                    str[y] += " ";
+            }
+        }
+
+        return str;
+    }
+
     readonly public static string[] testMap = new string[36]
     {
         "+                                                              +",

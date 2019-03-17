@@ -396,6 +396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileAtlas: {fileID: 2800000, guid: 0b6ada07b7de3b847bb941d12d2ac41b, type: 3}
   tileSizePixels: 30
+  mapImage: {fileID: 2800000, guid: a15f9f8a1bbdabc428360a533e3e3930, type: 3}
   numTiles: {x: 0, y: 0}
   mapTextureSize: {x: 0, y: 0}
   scaledTileAtlas: {fileID: 0}

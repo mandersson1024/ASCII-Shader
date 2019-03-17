@@ -283,17 +283,17 @@ PrefabInstance:
     - target: {fileID: 6570940811123998705, guid: d773dde9898005d4e86f022a21f2635e,
         type: 3}
       propertyPath: m_BackGroundColor.r
-      value: 0
+      value: 0.6792453
       objectReference: {fileID: 0}
     - target: {fileID: 6570940811123998705, guid: d773dde9898005d4e86f022a21f2635e,
         type: 3}
       propertyPath: m_BackGroundColor.g
-      value: 0
+      value: 0.62064147
       objectReference: {fileID: 0}
     - target: {fileID: 6570940811123998705, guid: d773dde9898005d4e86f022a21f2635e,
         type: 3}
       propertyPath: m_BackGroundColor.b
-      value: 0
+      value: 0.52224994
       objectReference: {fileID: 0}
     - target: {fileID: 6570940811123998705, guid: d773dde9898005d4e86f022a21f2635e,
         type: 3}
@@ -314,7 +314,7 @@ GameObject:
   - component: {fileID: 1160349486}
   - component: {fileID: 1160349488}
   m_Layer: 0
-  m_Name: Tylemap
+  m_Name: TileMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -396,6 +396,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileAtlas: {fileID: 2800000, guid: 0b6ada07b7de3b847bb941d12d2ac41b, type: 3}
   numTiles: {x: 64, y: 36}
-  tileSizePixels: 30
+  tileSizePixels: 20
   mapTextureSize: {x: 0, y: 0}
   scaledTileAtlas: {fileID: 0}

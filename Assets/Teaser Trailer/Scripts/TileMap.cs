@@ -13,10 +13,10 @@ public class TileMap : MonoBehaviour
     public Texture2D tileAtlas;
     public int tileSizePixels = 30;
     public Texture2D mapImage;
+    public Texture2D backgroundImage;
 
     Texture2D mapTexture;
     readonly Sprite mapSprite;
-
 
     SpriteRenderer spriteRenderer;
 
@@ -34,13 +34,14 @@ public class TileMap : MonoBehaviour
     {
         scaledTileAtlas = tileAtlas.CloneAndScale(tileSizePixels * 16, tileSizePixels * 16);
         tileset = new Tileset(scaledTileAtlas, tileSizePixels);
-
+        
         mapTexture = CreateTextureFromCharacterMap(CharacterMapper.testMap);
         //PopulateFromCharacterMap(CharacterMapper.testMap);
         string[] str = CharacterMapper.FromImage(mapImage);
         PopulateFromCharacterMap(str);
 
         spriteRenderer.sprite = Sprite.Create(mapTexture, new Rect(0f, 0f, mapTextureSize.x, mapTextureSize.y), new Vector2(0.5f, 0.5f), pixelsPerUnit);
+        spriteRenderer.material.SetTexture("_BackgroundTex", backgroundImage);
     }
 
     void CopyTexture(Texture2D src, Texture2D dst, int x, int y)

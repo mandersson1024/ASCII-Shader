@@ -13,7 +13,13 @@ public class TileMap : MonoBehaviour
     public Texture2D tileAtlas;
     public int tileSizePixels = 30;
     public Texture2D mapImage;
-    public Texture2D backgroundImage;
+    public Texture2D hiResBackground;
+
+    [Range(0, 1)]
+    public float backgroundBlend = 0.5f;
+
+    [Range(0, 1)]
+    public float backgroundIntensity = 1f;
 
     Texture2D mapTexture;
     readonly Sprite mapSprite;
@@ -24,6 +30,7 @@ public class TileMap : MonoBehaviour
     public Vector2Int numTiles;
     public Vector2Int mapTextureSize;
     public Texture2D scaledTileAtlas;
+    public RenderTexture loResBackground;
 
     private void Awake()
     {
@@ -40,8 +47,14 @@ public class TileMap : MonoBehaviour
         string[] str = CharacterMapper.FromImage(mapImage);
         PopulateFromCharacterMap(str);
 
+        loResBackground = new RenderTexture(numTiles.x, numTiles.y, 1)
+        {
+            filterMode = FilterMode.Point
+        };
+
         spriteRenderer.sprite = Sprite.Create(mapTexture, new Rect(0f, 0f, mapTextureSize.x, mapTextureSize.y), new Vector2(0.5f, 0.5f), pixelsPerUnit);
-        spriteRenderer.material.SetTexture("_BackgroundTex", backgroundImage);
+        spriteRenderer.material.SetTexture("_HiResBackgroundTex", hiResBackground);
+        spriteRenderer.material.SetTexture("_LoResBackgroundTex", loResBackground);
     }
 
     void CopyTexture(Texture2D src, Texture2D dst, int x, int y)
@@ -71,6 +84,14 @@ public class TileMap : MonoBehaviour
                 tileset.DrawTile(mapTexture, index, x * tileset.tileSizePixels, mapTextureSize.y - (y + 1) * tileset.tileSizePixels);
             }
         }
+    }
+
+    private void Update()
+    {
+        spriteRenderer.material.SetFloat("_BackgroundBlend", backgroundBlend);
+        spriteRenderer.material.SetFloat("_BackgroundIntensity", backgroundIntensity);
+
+        Graphics.Blit(hiResBackground, loResBackground);
     }
 
 }

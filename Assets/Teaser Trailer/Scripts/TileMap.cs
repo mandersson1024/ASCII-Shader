@@ -14,12 +14,19 @@ public class TileMap : MonoBehaviour
     public int tileSizePixels = 30;
     public Texture2D mapImage;
     public Texture2D hiResBackground;
+    public Texture2D hiResForeground;
 
     [Range(0, 1)]
     public float backgroundBlend = 0.5f;
 
     [Range(0, 1)]
     public float backgroundIntensity = 1f;
+
+    [Range(0, 1)]
+    public float foregroundBlend = 0.5f;
+
+    [Range(0, 1)]
+    public float foregroundIntensity = 1f;
 
     Texture2D mapTexture;
     readonly Sprite mapSprite;
@@ -31,6 +38,7 @@ public class TileMap : MonoBehaviour
     public Vector2Int mapTextureSize;
     public Texture2D scaledTileAtlas;
     public RenderTexture loResBackground;
+    public RenderTexture loResForeground;
 
     private void Awake()
     {
@@ -52,9 +60,16 @@ public class TileMap : MonoBehaviour
             filterMode = FilterMode.Point
         };
 
+        loResForeground = new RenderTexture(numTiles.x, numTiles.y, 1)
+        {
+            filterMode = FilterMode.Point
+        };
+
         spriteRenderer.sprite = Sprite.Create(mapTexture, new Rect(0f, 0f, mapTextureSize.x, mapTextureSize.y), new Vector2(0.5f, 0.5f), pixelsPerUnit);
         spriteRenderer.material.SetTexture("_HiResBackgroundTex", hiResBackground);
         spriteRenderer.material.SetTexture("_LoResBackgroundTex", loResBackground);
+        spriteRenderer.material.SetTexture("_HiResForegroundTex", hiResForeground);
+        spriteRenderer.material.SetTexture("_LoResForegroundTex", loResForeground);
     }
 
     void CopyTexture(Texture2D src, Texture2D dst, int x, int y)
@@ -91,7 +106,11 @@ public class TileMap : MonoBehaviour
         spriteRenderer.material.SetFloat("_BackgroundBlend", backgroundBlend);
         spriteRenderer.material.SetFloat("_BackgroundIntensity", backgroundIntensity);
 
+        spriteRenderer.material.SetFloat("_ForegroundBlend", foregroundBlend);
+        spriteRenderer.material.SetFloat("_ForegroundIntensity", foregroundIntensity);
+
         Graphics.Blit(hiResBackground, loResBackground);
+        Graphics.Blit(hiResForeground, loResForeground);
     }
 
 }

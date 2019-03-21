@@ -401,7 +401,7 @@ MonoBehaviour:
   hiResForeground: {fileID: 2800000, guid: 2828f539270b35d4cb286ee1db0d34a3, type: 3}
   backgroundBlend: 0
   backgroundIntensity: 1
-  foregroundBlend: 0
+  foregroundBlend: 1
   foregroundIntensity: 1
   numTiles: {x: 0, y: 0}
   mapTextureSize: {x: 0, y: 0}

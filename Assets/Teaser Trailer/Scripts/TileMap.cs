@@ -71,6 +71,15 @@ public class TileMap : MonoBehaviour
 
         SpriteRenderer sprite = CreateSprite('*', new Color32(255, 0, 255, 255));
         PlaceSpriteAt(sprite, 0, 0);
+
+        sprite = CreateSprite('*', new Color32(0, 255, 255, 255));
+        PlaceSpriteAt(sprite, numTiles.x - 1, 0);
+
+        sprite = CreateSprite('*', new Color32(255, 255, 0, 255));
+        PlaceSpriteAt(sprite, 0, numTiles.y - 1);
+
+        sprite = CreateSprite('*', new Color32(255, 0, 0, 255));
+        PlaceSpriteAt(sprite, numTiles.x - 1, numTiles.y - 1);
     }
 
     SpriteRenderer CreateSprite(char chr, Color color)
@@ -78,7 +87,10 @@ public class TileMap : MonoBehaviour
         int tileIndex = CharacterMapper.GetIndex(chr);
         var rect = tileset.GetRectForTileIndex(tileIndex).ToRect();
         Sprite sprite = Sprite.Create(scaledTileAtlas, rect, Vector2.zero, pixelsPerUnit);
+
         GameObject go = new GameObject("sprite", typeof(SpriteRenderer));
+        go.transform.parent = mapTextureRenderer.transform;
+
         SpriteRenderer renderer = go.GetComponent<SpriteRenderer>();
         renderer.sprite = sprite;
         renderer.color = color;
@@ -87,7 +99,12 @@ public class TileMap : MonoBehaviour
 
     void PlaceSpriteAt(SpriteRenderer sprite, int x, int y)
     {
-        
+        sprite.transform.position = TileCoordsToSpritePosition(x, y);
+    }
+
+    Vector2 TileCoordsToSpritePosition(int x, int y)
+    {
+        return new Vector2((x - numTiles.x / 2) * tileSizePixels, (-1 - y + numTiles.y / 2) * tileSizePixels);
     }
 
     void CopyTexture(Texture2D src, Texture2D dst, int x, int y)

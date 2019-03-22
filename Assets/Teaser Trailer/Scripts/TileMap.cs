@@ -75,7 +75,9 @@ public class TileMap : MonoBehaviour
 
     SpriteRenderer CreateSprite(char chr, Color color)
     {
-        Sprite sprite = Sprite.Create(scaledTileAtlas, new Rect(0, 0, 480, 480), Vector2.zero, pixelsPerUnit);
+        int tileIndex = CharacterMapper.GetIndex(chr);
+        var rect = tileset.GetRectForTileIndex(tileIndex).ToRect();
+        Sprite sprite = Sprite.Create(scaledTileAtlas, rect, Vector2.zero, pixelsPerUnit);
         GameObject go = new GameObject("sprite", typeof(SpriteRenderer));
         SpriteRenderer renderer = go.GetComponent<SpriteRenderer>();
         renderer.sprite = sprite;

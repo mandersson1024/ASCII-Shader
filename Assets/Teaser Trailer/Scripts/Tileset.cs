@@ -14,10 +14,15 @@ public class Tileset
 
     public void DrawTile(Texture2D destination, int tileIndex, int x, int y)
     {
-        int tileX = (tileIndex % 16) * tileSizePixels;
-        int tileY = (15 - (tileIndex / 16)) * tileSizePixels;
-        //Debug.Log("tileX=" + tileX + ", tileY=" + tileY);
-        Graphics.CopyTexture(atlas, 0, 0, tileX, tileY, tileSizePixels, tileSizePixels, destination, 0, 0, x, y);
+        RectInt rect = GetRectForTileIndex(tileIndex);
+        Graphics.CopyTexture(atlas, 0, 0, rect.x, rect.y, rect.width, rect.height, destination, 0, 0, x, y);
+    }
+
+    public RectInt GetRectForTileIndex(int index)
+    {
+        int tileX = (index % 16) * tileSizePixels;
+        int tileY = (15 - (index / 16)) * tileSizePixels;
+        return new RectInt(tileX, tileY, tileSizePixels, tileSizePixels);
     }
 
 }

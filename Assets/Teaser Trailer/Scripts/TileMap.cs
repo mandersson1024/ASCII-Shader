@@ -29,9 +29,7 @@ public class TileMap : MonoBehaviour
     public float foregroundIntensity = 1f;
 
     Texture2D mapTexture;
-    readonly Sprite mapSprite;
-
-    SpriteRenderer spriteRenderer;
+    SpriteRenderer mapTextureRenderer;
 
     [Header("Debug info")]
     public Vector2Int numTiles;
@@ -42,7 +40,7 @@ public class TileMap : MonoBehaviour
 
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        mapTextureRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
@@ -65,11 +63,29 @@ public class TileMap : MonoBehaviour
             filterMode = FilterMode.Point
         };
 
-        spriteRenderer.sprite = Sprite.Create(mapTexture, new Rect(0f, 0f, mapTextureSize.x, mapTextureSize.y), new Vector2(0.5f, 0.5f), pixelsPerUnit);
-        spriteRenderer.material.SetTexture("_HiResBackgroundTex", hiResBackground);
-        spriteRenderer.material.SetTexture("_LoResBackgroundTex", loResBackground);
-        spriteRenderer.material.SetTexture("_HiResForegroundTex", hiResForeground);
-        spriteRenderer.material.SetTexture("_LoResForegroundTex", loResForeground);
+        mapTextureRenderer.sprite = Sprite.Create(mapTexture, new Rect(0f, 0f, mapTextureSize.x, mapTextureSize.y), new Vector2(0.5f, 0.5f), pixelsPerUnit);
+        mapTextureRenderer.material.SetTexture("_HiResBackgroundTex", hiResBackground);
+        mapTextureRenderer.material.SetTexture("_LoResBackgroundTex", loResBackground);
+        mapTextureRenderer.material.SetTexture("_HiResForegroundTex", hiResForeground);
+        mapTextureRenderer.material.SetTexture("_LoResForegroundTex", loResForeground);
+
+        SpriteRenderer sprite = CreateSprite('*', new Color32(255, 0, 255, 255));
+        PlaceSpriteAt(sprite, 0, 0);
+    }
+
+    SpriteRenderer CreateSprite(char chr, Color color)
+    {
+        Sprite sprite = Sprite.Create(scaledTileAtlas, new Rect(0, 0, 480, 480), Vector2.zero, pixelsPerUnit);
+        GameObject go = new GameObject("sprite", typeof(SpriteRenderer));
+        SpriteRenderer renderer = go.GetComponent<SpriteRenderer>();
+        renderer.sprite = sprite;
+        renderer.color = color;
+        return renderer;
+    }
+
+    void PlaceSpriteAt(SpriteRenderer sprite, int x, int y)
+    {
+        
     }
 
     void CopyTexture(Texture2D src, Texture2D dst, int x, int y)
@@ -103,11 +119,11 @@ public class TileMap : MonoBehaviour
 
     private void Update()
     {
-        spriteRenderer.material.SetFloat("_BackgroundBlend", backgroundBlend);
-        spriteRenderer.material.SetFloat("_BackgroundIntensity", backgroundIntensity);
+        mapTextureRenderer.material.SetFloat("_BackgroundBlend", backgroundBlend);
+        mapTextureRenderer.material.SetFloat("_BackgroundIntensity", backgroundIntensity);
 
-        spriteRenderer.material.SetFloat("_ForegroundBlend", foregroundBlend);
-        spriteRenderer.material.SetFloat("_ForegroundIntensity", foregroundIntensity);
+        mapTextureRenderer.material.SetFloat("_ForegroundBlend", foregroundBlend);
+        mapTextureRenderer.material.SetFloat("_ForegroundIntensity", foregroundIntensity);
 
         Graphics.Blit(hiResBackground, loResBackground);
         Graphics.Blit(hiResForeground, loResForeground);

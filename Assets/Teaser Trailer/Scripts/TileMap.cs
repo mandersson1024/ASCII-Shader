@@ -69,40 +69,13 @@ public class TileMap : MonoBehaviour
         mapTextureRenderer.material.SetTexture("_HiResForegroundTex", hiResForeground);
         mapTextureRenderer.material.SetTexture("_LoResForegroundTex", loResForeground);
 
-        SpriteRenderer sprite = CreateSprite('*', new Color32(255, 0, 255, 255));
-        PlaceSpriteAt(sprite, 0, 0);
-
-        sprite = CreateSprite('*', new Color32(0, 255, 255, 255));
-        PlaceSpriteAt(sprite, numTiles.x - 1, 0);
-
-        sprite = CreateSprite('*', new Color32(255, 255, 0, 255));
-        PlaceSpriteAt(sprite, 0, numTiles.y - 1);
-
-        sprite = CreateSprite('*', new Color32(255, 0, 0, 255));
-        PlaceSpriteAt(sprite, numTiles.x - 1, numTiles.y - 1);
+        Entity.Create(mapTextureRenderer.transform, tileset, '*', this, 0, 0, Color.magenta);
+        Entity.Create(mapTextureRenderer.transform, tileset, '*', this, numTiles.x - 1, 0, Color.cyan);
+        Entity.Create(mapTextureRenderer.transform, tileset, '*', this, 0, numTiles.y - 1, Color.yellow);
+        Entity.Create(mapTextureRenderer.transform, tileset, '*', this, numTiles.x - 1, numTiles.y - 1, Color.red);
     }
 
-    SpriteRenderer CreateSprite(char chr, Color color)
-    {
-        int tileIndex = CharacterMapper.GetIndex(chr);
-        var rect = tileset.GetRectForTileIndex(tileIndex).ToRect();
-        Sprite sprite = Sprite.Create(scaledTileAtlas, rect, Vector2.zero, pixelsPerUnit);
-
-        GameObject go = new GameObject("sprite", typeof(SpriteRenderer));
-        go.transform.parent = mapTextureRenderer.transform;
-
-        SpriteRenderer renderer = go.GetComponent<SpriteRenderer>();
-        renderer.sprite = sprite;
-        renderer.color = color;
-        return renderer;
-    }
-
-    void PlaceSpriteAt(SpriteRenderer sprite, int x, int y)
-    {
-        sprite.transform.position = TileCoordsToSpritePosition(x, y);
-    }
-
-    Vector2 TileCoordsToSpritePosition(int x, int y)
+    public Vector2 TileCoordsToSpritePosition(int x, int y)
     {
         return new Vector2((x - numTiles.x / 2) * tileSizePixels, (-1 - y + numTiles.y / 2) * tileSizePixels);
     }

@@ -3,7 +3,7 @@ using UnityEditor;
 
 public class Tileset
 {
-    readonly Texture2D atlas;
+    readonly public Texture2D atlas;
     readonly public int tileSizePixels;
 
     public Tileset(Texture2D atlas, int tileSizePixels)

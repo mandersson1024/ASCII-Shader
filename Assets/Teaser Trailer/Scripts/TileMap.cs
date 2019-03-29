@@ -75,13 +75,19 @@ public class TileMap : MonoBehaviour
         Entity.Create(mapTextureRenderer.transform, tileset, '*', this, 0, numTiles.y - 1, Color.yellow);
         Entity.Create(mapTextureRenderer.transform, tileset, '*', this, numTiles.x - 1, numTiles.y - 1, Color.red);
 
-        // Fire
+        // Fire Effect
         Vector2Int[] positions = { new Vector2Int(18, 20), new Vector2Int(18, 21), new Vector2Int(19, 20), new Vector2Int(19, 21), };
         foreach (Vector2Int pos in positions)
         {
             Entity e = Entity.Create(mapTextureRenderer.transform, tileset, '*', this, pos.x, pos.y, Color.magenta);
-            FlickerEffect colorFade = e.gameObject.AddComponent<FlickerEffect>();
-            colorFade.tileset = tileset;
+            FlickerEffect fx = e.gameObject.AddComponent<FlickerEffect>();
+            fx.tileset = tileset;
+        }
+
+        // FadeAndDie Effect
+        {
+            Entity e = Entity.Create(mapTextureRenderer.transform, tileset, '*', this, 32, 15, Color.cyan);
+            FadeAndDieEffect fx = e.gameObject.AddComponent<FadeAndDieEffect>();
         }
     }
 

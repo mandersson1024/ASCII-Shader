@@ -12,25 +12,25 @@ public class CharacterMapper
         return index == -1 ? 0 : index;
     }
 
-    public static string[] FromImage(Texture2D image)
+    public static char[,] FromImage(Texture2D image)
     {
-        string[] str = new string[image.width];
+        char[,] result = new char[image.width, image.height];
 
         for (int y = 0; y < image.height; ++y)
         {
             for (int x = 0; x < image.width; ++x)
             {
-                Color32 c = image.GetPixel(x, y);
+                Color32 c = image.GetPixel(x, image.height - y - 1);
 
                 // todo: this is crude
                 if (c == Color.white)
-                    str[y] += "#";
+                    result[x, y] += '#';
                 else
-                    str[y] += " ";
+                    result[x, y] += ' ';
             }
         }
 
-        return str;
+        return result;
     }
 
     readonly public static string[] testMap = new string[36]

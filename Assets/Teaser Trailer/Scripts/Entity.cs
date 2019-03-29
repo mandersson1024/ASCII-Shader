@@ -12,7 +12,7 @@ public class Entity : MonoBehaviour
         GameObject go = new GameObject("entity", typeof(SpriteRenderer), typeof(Entity));
         Entity entity = go.GetComponent<Entity>();
         entity.spriteRenderer = go.GetComponent<SpriteRenderer>();
-        entity.spriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask; // TODO: this is really only for the teaser trailer
+        //entity.spriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask; // TODO: this is really only for the teaser trailer
         entity.transform.parent = parent;
         return entity;
     }

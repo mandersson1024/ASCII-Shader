@@ -47,10 +47,11 @@ public class TileMap : MonoBehaviour
         scaledTileAtlas = tileAtlas.CloneAndScale(tileSizePixels * 16, tileSizePixels * 16);
         tileset = new Tileset(scaledTileAtlas, tileSizePixels);
         
-        mapTexture = CreateTextureFromCharacterMap(CharacterMapper.testMap);
+        //mapTexture = CreateTextureFromCharacterMap(CharacterMapper.testMap);
         //PopulateFromCharacterMap(CharacterMapper.testMap);
-        string[] str = CharacterMapper.FromImage(mapImage);
-        PopulateFromCharacterMap(str);
+        char[,] charMap = CharacterMapper.FromImage(mapImage);
+        mapTexture = CreateTextureFromCharacterMap(charMap);
+        PopulateFromCharacterMap(charMap);
 
         loResBackground = new RenderTexture(numTiles.x, numTiles.y, 1)
         {
@@ -75,7 +76,13 @@ public class TileMap : MonoBehaviour
         Entity.Create(mapTextureRenderer.transform, entityMaterial, tileset, '*', this, numTiles.x - 1, numTiles.y - 1, Color.red);
 
         // Fire Effect
-        Vector2Int[] positions = { new Vector2Int(18, 20), new Vector2Int(18, 21), new Vector2Int(19, 20), new Vector2Int(19, 21), };
+        Vector2Int[] positions = {
+            new Vector2Int(37, 24),
+            new Vector2Int(37, 25),
+            new Vector2Int(38, 24),
+            new Vector2Int(38, 25),
+        };
+
         foreach (Vector2Int pos in positions)
         {
             Entity e = Entity.Create(mapTextureRenderer.transform, entityMaterial, tileset, '*', this, pos.x, pos.y, Color.magenta);
@@ -99,17 +106,21 @@ public class TileMap : MonoBehaviour
 
         Vector2Int[] positions =
         {
-            new Vector2Int(30, 20),
-            new Vector2Int(40, 20),
-            new Vector2Int(40, 30),
-            new Vector2Int(30, 30),
+            new Vector2Int(57, 9),
+            new Vector2Int(61, 9),
+            new Vector2Int(61, 10),
+            new Vector2Int(63, 10),
+            new Vector2Int(63, 16),
+            new Vector2Int(55, 16),
+            new Vector2Int(55, 10),
+            new Vector2Int(57, 10),
         };
 
         int index = 0;
 
         while (true)
         {
-            int nextIndex = (index + 1) % 4;
+            int nextIndex = (index + 1) % positions.Length;
             Vector2Int startPos = positions[index];
             Vector2Int endPos = positions[nextIndex];
             Vector2Int direction = endPos - startPos;
@@ -122,7 +133,7 @@ public class TileMap : MonoBehaviour
                 yield return new WaitForSeconds(delay);
             }
 
-            index = (index + 1) % 4;
+            index = (index + 1) % positions.Length;
         }
     }
 
@@ -136,10 +147,10 @@ public class TileMap : MonoBehaviour
         Graphics.CopyTexture(src, 0, 0, 0, 0, src.width, src.height, dst, 0, 0, x, y);
     }
 
-    private Texture2D CreateTextureFromCharacterMap(string[] characterMap)
+    private Texture2D CreateTextureFromCharacterMap(char[,] characterMap)
     {
-        numTiles.x = characterMap[0].Length;
-        numTiles.y = characterMap.Length;
+        numTiles.x = characterMap.GetLength(0);
+        numTiles.y = characterMap.GetLength(1);
 
         mapTextureSize.x = numTiles.x * tileSizePixels;
         mapTextureSize.y = numTiles.y * tileSizePixels;
@@ -147,13 +158,13 @@ public class TileMap : MonoBehaviour
         return new Texture2D(mapTextureSize.x, mapTextureSize.y, TextureFormat.RGBA32, false);
     }
 
-    private void PopulateFromCharacterMap(string[] characterMap)
+    private void PopulateFromCharacterMap(char[,] characterMap)
     {
         for (int y = 0; y < numTiles.y; ++y)
         {
             for (int x = 0; x < numTiles.x; ++x)
             {
-                char c = characterMap[y][x];
+                char c = characterMap[x,y];
                 int index = CharacterMapper.GetIndex(c);
                 tileset.DrawTile(mapTexture, index, x * tileset.tileSizePixels, mapTextureSize.y - (y + 1) * tileset.tileSizePixels);
             }

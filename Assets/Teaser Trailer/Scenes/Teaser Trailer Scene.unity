@@ -462,7 +462,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
-  m_MaskInteraction: 1
+  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1160349487
 Transform:
@@ -491,8 +491,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileAtlas: {fileID: 2800000, guid: 0b6ada07b7de3b847bb941d12d2ac41b, type: 3}
-  tileSizePixels: 30
-  mapImage: {fileID: 2800000, guid: a15f9f8a1bbdabc428360a533e3e3930, type: 3}
+  tileSizePixels: 20
+  mapImage: {fileID: 2800000, guid: 62e9a4009cef2fc43bc7fd5bd6988667, type: 3}
   hiResBackground: {fileID: 2800000, guid: e403e99799827444ca5ac6ddf0b1799e, type: 3}
   hiResForeground: {fileID: 2800000, guid: 2828f539270b35d4cb286ee1db0d34a3, type: 3}
   entityMaterial: {fileID: 2100000, guid: c80a58627aaacf141baf199d8027c5ad, type: 2}

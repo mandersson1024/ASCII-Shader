@@ -69,13 +69,20 @@ public class TileMap : MonoBehaviour
         mapTextureRenderer.material.SetTexture("_HiResForegroundTex", hiResForeground);
         mapTextureRenderer.material.SetTexture("_LoResForegroundTex", loResForeground);
 
-        Entity e = Entity.Create(mapTextureRenderer.transform, tileset, '*', this, 0, 0, Color.magenta);
-        FlickerEffect colorFade = e.gameObject.AddComponent<FlickerEffect>();
-        colorFade.tileset = tileset;
-
+        // Corners of the map
+        Entity.Create(mapTextureRenderer.transform, tileset, '*', this, 0, 0, Color.magenta);
         Entity.Create(mapTextureRenderer.transform, tileset, '*', this, numTiles.x - 1, 0, Color.cyan);
         Entity.Create(mapTextureRenderer.transform, tileset, '*', this, 0, numTiles.y - 1, Color.yellow);
         Entity.Create(mapTextureRenderer.transform, tileset, '*', this, numTiles.x - 1, numTiles.y - 1, Color.red);
+
+        // Fire
+        Vector2Int[] positions = { new Vector2Int(18, 20), new Vector2Int(18, 21), new Vector2Int(19, 20), new Vector2Int(19, 21), };
+        foreach (Vector2Int pos in positions)
+        {
+            Entity e = Entity.Create(mapTextureRenderer.transform, tileset, '*', this, pos.x, pos.y, Color.magenta);
+            FlickerEffect colorFade = e.gameObject.AddComponent<FlickerEffect>();
+            colorFade.tileset = tileset;
+        }
     }
 
     public Vector2 TileCoordsToSpritePosition(int x, int y)

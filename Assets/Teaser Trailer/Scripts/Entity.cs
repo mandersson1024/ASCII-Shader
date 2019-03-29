@@ -65,4 +65,9 @@ public class Entity : MonoBehaviour
         spriteRenderer.color = c;
     }
 
+    public Color GetColor()
+    {
+        return spriteRenderer.color;
+    }
+
 }

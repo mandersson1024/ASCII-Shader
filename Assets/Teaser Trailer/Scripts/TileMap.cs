@@ -70,9 +70,8 @@ public class TileMap : MonoBehaviour
         mapTextureRenderer.material.SetTexture("_LoResForegroundTex", loResForeground);
 
         Entity e = Entity.Create(mapTextureRenderer.transform, tileset, '*', this, 0, 0, Color.magenta);
-        FlickerTile flicker = e.gameObject.AddComponent<FlickerTile>();
-        flicker.tileset = tileset;
-        flicker.variations = "*#+";
+        FlickerEffect colorFade = e.gameObject.AddComponent<FlickerEffect>();
+        colorFade.tileset = tileset;
 
         Entity.Create(mapTextureRenderer.transform, tileset, '*', this, numTiles.x - 1, 0, Color.cyan);
         Entity.Create(mapTextureRenderer.transform, tileset, '*', this, 0, numTiles.y - 1, Color.yellow);

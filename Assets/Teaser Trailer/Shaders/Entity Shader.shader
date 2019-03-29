@@ -54,8 +54,7 @@
 				fixed4 fgCol = _Color * inputCol;
 				fgCol.a = inputCol.r * _Color.a;
 
-				fixed4 bgCol = _Color;
-				bgCol.a = _Glow * _Color.a;
+				fixed4 bgCol = _Color * _Glow;
 
 				fixed4 col = lerp(bgCol, fgCol, inputCol.r);
 

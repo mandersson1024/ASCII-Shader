@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Entity))]
 public class FadeAndDieEffect : MonoBehaviour
 {
-    public float fadeTime = 2f;
+    public float fadeTime = 1f;
     Entity entity;
     float spawnTime;
 

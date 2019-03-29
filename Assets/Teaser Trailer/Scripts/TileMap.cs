@@ -84,10 +84,46 @@ public class TileMap : MonoBehaviour
             fx.tileset = tileset;
         }
 
+        StartCoroutine(GhostWalker());
+    }
+
+    void PlaceGhost(int x, int y)
+    {
         // FadeAndDie Effect
+        Entity e = Entity.Create(mapTextureRenderer.transform, tileset, '*', this, x, y, Color.cyan);
+        FadeAndDieEffect fx = e.gameObject.AddComponent<FadeAndDieEffect>();
+    }
+
+    IEnumerator GhostWalker()
+    {
+        float delay = 0.13f;
+
+        Vector2Int[] positions =
         {
-            Entity e = Entity.Create(mapTextureRenderer.transform, tileset, '*', this, 32, 15, Color.cyan);
-            FadeAndDieEffect fx = e.gameObject.AddComponent<FadeAndDieEffect>();
+            new Vector2Int(30, 20),
+            new Vector2Int(40, 20),
+            new Vector2Int(40, 30),
+            new Vector2Int(30, 30),
+        };
+
+        int index = 0;
+
+        while (true)
+        {
+            int nextIndex = (index + 1) % 4;
+            Vector2Int startPos = positions[index];
+            Vector2Int endPos = positions[nextIndex];
+            Vector2Int direction = endPos - startPos;
+            direction.x = Math.Sign(direction.x);
+            direction.y = Math.Sign(direction.y);
+
+            for (Vector2Int pos = startPos; pos != endPos; pos += direction)
+            {
+                PlaceGhost(pos.x, pos.y);
+                yield return new WaitForSeconds(delay);
+            }
+
+            index = (index + 1) % 4;
         }
     }
 

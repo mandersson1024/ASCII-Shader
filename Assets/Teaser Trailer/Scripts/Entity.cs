@@ -16,9 +16,10 @@ public class Entity : MonoBehaviour
         return entity;
     }
 
-    public static Entity Create(Transform parent, Tileset tileset, char c, TileMap map, int posX, int posY, Color color)
+    public static Entity Create(Transform parent, Material material, Tileset tileset, char c, TileMap map, int posX, int posY, Color color)
     {
         Entity entity = Create(parent);
+        entity.SetMaterial(material);
         entity.SetTile(tileset, c);
         entity.SetPosition(map, posX, posY);
         entity.SetColor(color);
@@ -46,6 +47,11 @@ public class Entity : MonoBehaviour
         
     }
 
+    public void SetMaterial(Material material)
+    {
+        spriteRenderer.material = material;
+    }
+
     public void SetTile(Tileset tileset, char c)
     {
         int tileIndex = CharacterMapper.GetIndex(c);
@@ -60,14 +66,19 @@ public class Entity : MonoBehaviour
         transform.position = map.TileCoordsToSpritePosition(position.x, position.y);
     }
 
+    public void SetGlow(float glow)
+    {
+        spriteRenderer.material.SetFloat("_Glow", glow);
+    }
+
     public void SetColor(Color c)
     {
-        spriteRenderer.color = c;
+        spriteRenderer.material.SetColor("_Color", c);
     }
 
     public Color GetColor()
     {
-        return spriteRenderer.color;
+        return spriteRenderer.material.GetColor("_Color");
     }
 
 }

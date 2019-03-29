@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Entity))]
 public class FadeAndDieEffect : MonoBehaviour
 {
-    public float fadeTime = 1f;
+    public float fadeTime = 2f;
     Entity entity;
     float spawnTime;
 
@@ -22,5 +22,10 @@ public class FadeAndDieEffect : MonoBehaviour
         Color c = entity.GetColor();
         c.a = alpha;
         entity.SetColor(c);
+
+        if (uptime >= fadeTime)
+        {
+            Destroy(gameObject);
+        }
     }
 }

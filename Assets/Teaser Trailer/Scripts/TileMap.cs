@@ -15,6 +15,7 @@ public class TileMap : MonoBehaviour
     public Texture2D mapImage;
     public Texture2D hiResBackground;
     public Texture2D hiResForeground;
+    public Material entityMaterial;
 
     [Range(0, 1)]
     public float backgroundBlend = 0.5f;
@@ -38,13 +39,11 @@ public class TileMap : MonoBehaviour
     public RenderTexture loResBackground;
     public RenderTexture loResForeground;
 
-    private void Awake()
-    {
-        mapTextureRenderer = GetComponent<SpriteRenderer>();
-    }
-
     private void Start()
     {
+        Assert.IsNotNull(entityMaterial);
+
+        mapTextureRenderer = GetComponent<SpriteRenderer>();
         scaledTileAtlas = tileAtlas.CloneAndScale(tileSizePixels * 16, tileSizePixels * 16);
         tileset = new Tileset(scaledTileAtlas, tileSizePixels);
         
@@ -70,16 +69,16 @@ public class TileMap : MonoBehaviour
         mapTextureRenderer.material.SetTexture("_LoResForegroundTex", loResForeground);
 
         // Corners of the map
-        Entity.Create(mapTextureRenderer.transform, tileset, '*', this, 0, 0, Color.magenta);
-        Entity.Create(mapTextureRenderer.transform, tileset, '*', this, numTiles.x - 1, 0, Color.cyan);
-        Entity.Create(mapTextureRenderer.transform, tileset, '*', this, 0, numTiles.y - 1, Color.yellow);
-        Entity.Create(mapTextureRenderer.transform, tileset, '*', this, numTiles.x - 1, numTiles.y - 1, Color.red);
+        Entity.Create(mapTextureRenderer.transform, entityMaterial, tileset, '*', this, 0, 0, Color.magenta);
+        Entity.Create(mapTextureRenderer.transform, entityMaterial, tileset, '*', this, numTiles.x - 1, 0, Color.cyan);
+        Entity.Create(mapTextureRenderer.transform, entityMaterial, tileset, '*', this, 0, numTiles.y - 1, Color.yellow);
+        Entity.Create(mapTextureRenderer.transform, entityMaterial, tileset, '*', this, numTiles.x - 1, numTiles.y - 1, Color.red);
 
         // Fire Effect
         Vector2Int[] positions = { new Vector2Int(18, 20), new Vector2Int(18, 21), new Vector2Int(19, 20), new Vector2Int(19, 21), };
         foreach (Vector2Int pos in positions)
         {
-            Entity e = Entity.Create(mapTextureRenderer.transform, tileset, '*', this, pos.x, pos.y, Color.magenta);
+            Entity e = Entity.Create(mapTextureRenderer.transform, entityMaterial, tileset, '*', this, pos.x, pos.y, Color.magenta);
             FlickerEffect fx = e.gameObject.AddComponent<FlickerEffect>();
             fx.tileset = tileset;
         }
@@ -90,7 +89,7 @@ public class TileMap : MonoBehaviour
     void PlaceGhost(int x, int y)
     {
         // FadeAndDie Effect
-        Entity e = Entity.Create(mapTextureRenderer.transform, tileset, '*', this, x, y, Color.cyan);
+        Entity e = Entity.Create(mapTextureRenderer.transform, entityMaterial, tileset, '*', this, x, y, Color.cyan);
         FadeAndDieEffect fx = e.gameObject.AddComponent<FadeAndDieEffect>();
     }
 

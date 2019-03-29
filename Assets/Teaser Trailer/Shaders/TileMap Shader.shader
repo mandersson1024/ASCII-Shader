@@ -17,7 +17,9 @@
     SubShader
     {
         Tags { "RenderType"="Opaque" }
-        LOD 100
+
+		ZWrite Off
+		Cull Off
 
         Pass
         {

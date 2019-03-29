@@ -16,7 +16,7 @@
 	}
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+		Tags {"Queue" = "Transparent" "RenderType" = "Transparent" }
 
 		ZWrite Off
 		Cull Off

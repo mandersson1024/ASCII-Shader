@@ -2,14 +2,9 @@
 {
     Properties
     {
-		_MainTex("Main Texture", 2D) = "white" {}
-
-		_BackgroundTex("Background Texture", 2D) = "white" {}
-		
-		_HiResForegroundTex("Hi Res Foreground Texture", 2D) = "white" {}
-		_LoResForegroundTex("Lo Res Foreground Texture", 2D) = "white" {}
-		_ForegroundBlend("Foreground Blend", Range(0, 1)) = 0.5
-		_ForegroundIntensity("Foreground Intensity", Range(0, 1)) = 1
+		_MainTex("Raw Tile Texture", 2D) = "white" {}
+		_TileColorTex("Tile Color Texture", 2D) = "white" {}
+		_BackgroundColorTex("Background Color Texture", 2D) = "white" {}
 	}
     SubShader
     {
@@ -39,11 +34,8 @@
             };
 
 			sampler2D _MainTex;
-			sampler2D _BackgroundTex;
-			sampler2D _HiResForegroundTex;
-			sampler2D _LoResForegroundTex;
-			fixed _ForegroundBlend;
-			fixed _ForegroundIntensity;
+			sampler2D _TileColorTex;
+			sampler2D _BackgroundColorTex;
 
             v2f vert (appdata v)
             {
@@ -55,16 +47,11 @@
 
             fixed4 frag (v2f i) : SV_Target
             {
-				fixed4 mainCol = tex2D(_MainTex, i.uv);
+				fixed4 rawTileCol = tex2D(_MainTex, i.uv);
+				fixed4 tileCol = tex2D(_TileColorTex, i.uv);
+				fixed4 bgCol = tex2D(_BackgroundColorTex, i.uv);
 
-				fixed4 bgCol = tex2D(_BackgroundTex, i.uv);
-
-				fixed4 hiResFgCol = tex2D(_HiResForegroundTex, i.uv);
-				fixed4 loResFgCol = tex2D(_LoResForegroundTex, i.uv);
-				fixed4 fgCol = lerp(loResFgCol, hiResFgCol, _ForegroundBlend);
-				fgCol = lerp(mainCol, fgCol, _ForegroundIntensity);
-
-				fixed4 col = lerp(bgCol, fgCol, mainCol);
+				fixed4 col = lerp(bgCol, tileCol, rawTileCol);
 				
 				return col;
             }

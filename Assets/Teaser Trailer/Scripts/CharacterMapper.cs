@@ -26,6 +26,12 @@ public class CharacterMapper
                 if (c == Color.white)
                     result[x, y] += '#';
                 else
+                if (c == Color.green)
+                    result[x, y] += '*';
+                else
+                if (c == Color.cyan)
+                    result[x, y] += '$';
+                else
                     result[x, y] += ' ';
             }
         }

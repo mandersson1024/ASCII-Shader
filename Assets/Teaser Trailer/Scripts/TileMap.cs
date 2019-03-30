@@ -13,15 +13,9 @@ public class TileMap : MonoBehaviour
     public Texture2D tileAtlas;
     public int tileSizePixels = 30;
     public Texture2D tileTexture;
-    public Texture2D backgroundTexture;
-    public Texture2D hiResForeground;
+    public Texture2D tileColorTexture;
+    public Texture2D backgroundColorTexture;
     public Material entityMaterial;
-
-    [Range(0, 1)]
-    public float foregroundBlend = 0.5f;
-
-    [Range(0, 1)]
-    public float foregroundIntensity = 1f;
 
     Texture2D mapTexture;
     SpriteRenderer mapTextureRenderer;
@@ -30,7 +24,6 @@ public class TileMap : MonoBehaviour
     public Vector2Int numTiles;
     public Vector2Int mapTextureSize;
     public Texture2D scaledTileAtlas;
-    public RenderTexture loResForeground;
 
     private void Start()
     {
@@ -46,22 +39,17 @@ public class TileMap : MonoBehaviour
         mapTexture = CreateTextureFromCharacterMap(charMap);
         PopulateFromCharacterMap(charMap);
 
-        loResForeground = new RenderTexture(numTiles.x, numTiles.y, 1)
-        {
-            filterMode = FilterMode.Point
-        };
-
         mapTextureRenderer.sprite = Sprite.Create(mapTexture, new Rect(0f, 0f, mapTextureSize.x, mapTextureSize.y), new Vector2(0.5f, 0.5f), pixelsPerUnit);
-        mapTextureRenderer.material.SetTexture("_HiResBackgroundTex", backgroundTexture);
-        mapTextureRenderer.material.SetTexture("_BackgroundTex", backgroundTexture);
-        mapTextureRenderer.material.SetTexture("_HiResForegroundTex", hiResForeground);
-        mapTextureRenderer.material.SetTexture("_LoResForegroundTex", loResForeground);
+        mapTextureRenderer.material.SetTexture("_BackgroundColorTex", backgroundColorTexture);
+        mapTextureRenderer.material.SetTexture("_TileColorTex", tileColorTexture);
 
         // Corners of the map
+        /*
         Entity.Create(mapTextureRenderer.transform, entityMaterial, tileset, '*', this, 0, 0, Color.magenta);
         Entity.Create(mapTextureRenderer.transform, entityMaterial, tileset, '*', this, numTiles.x - 1, 0, Color.cyan);
         Entity.Create(mapTextureRenderer.transform, entityMaterial, tileset, '*', this, 0, numTiles.y - 1, Color.yellow);
         Entity.Create(mapTextureRenderer.transform, entityMaterial, tileset, '*', this, numTiles.x - 1, numTiles.y - 1, Color.red);
+        */
 
         // Fire Effect
         Vector2Int[] positions = {
@@ -161,10 +149,8 @@ public class TileMap : MonoBehaviour
 
     private void Update()
     {
-        mapTextureRenderer.material.SetFloat("_ForegroundBlend", foregroundBlend);
-        mapTextureRenderer.material.SetFloat("_ForegroundIntensity", foregroundIntensity);
-
-        Graphics.Blit(hiResForeground, loResForeground);
+        mapTextureRenderer.material.SetTexture("_BackgroundColorTex", backgroundColorTexture);
+        mapTextureRenderer.material.SetTexture("_TileColorTex", tileColorTexture);
     }
 
 }

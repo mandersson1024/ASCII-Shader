@@ -4,10 +4,7 @@
     {
 		_MainTex("Main Texture", 2D) = "white" {}
 
-		_HiResBackgroundTex("Hi Res Background Texture", 2D) = "white" {}
-		_LoResBackgroundTex("Lo Res Background Texture", 2D) = "white" {}
-		_BackgroundBlend("Background Blend", Range(0, 1)) = 0.5
-		_BackgroundIntensity("Background Intensity", Range(0, 1)) = 1
+		_BackgroundTex("Background Texture", 2D) = "white" {}
 		
 		_HiResForegroundTex("Hi Res Foreground Texture", 2D) = "white" {}
 		_LoResForegroundTex("Lo Res Foreground Texture", 2D) = "white" {}
@@ -42,12 +39,9 @@
             };
 
 			sampler2D _MainTex;
-			sampler2D _HiResBackgroundTex;
-			sampler2D _LoResBackgroundTex;
+			sampler2D _BackgroundTex;
 			sampler2D _HiResForegroundTex;
 			sampler2D _LoResForegroundTex;
-			fixed _BackgroundBlend;
-			fixed _BackgroundIntensity;
 			fixed _ForegroundBlend;
 			fixed _ForegroundIntensity;
 
@@ -63,10 +57,7 @@
             {
 				fixed4 mainCol = tex2D(_MainTex, i.uv);
 
-				fixed4 hiResBgCol = tex2D(_HiResBackgroundTex, i.uv);
-				fixed4 loResBgCol = tex2D(_LoResBackgroundTex, i.uv);
-				fixed4 bgCol = lerp(loResBgCol, hiResBgCol, _BackgroundBlend);
-				bgCol *= _BackgroundIntensity;
+				fixed4 bgCol = tex2D(_BackgroundTex, i.uv);
 
 				fixed4 hiResFgCol = tex2D(_HiResForegroundTex, i.uv);
 				fixed4 loResFgCol = tex2D(_LoResForegroundTex, i.uv);

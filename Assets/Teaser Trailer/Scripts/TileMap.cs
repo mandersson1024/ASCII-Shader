@@ -12,16 +12,10 @@ public class TileMap : MonoBehaviour
     Tileset tileset;
     public Texture2D tileAtlas;
     public int tileSizePixels = 30;
-    public Texture2D mapImage;
-    public Texture2D hiResBackground;
+    public Texture2D tileTexture;
+    public Texture2D backgroundTexture;
     public Texture2D hiResForeground;
     public Material entityMaterial;
-
-    [Range(0, 1)]
-    public float backgroundBlend = 0.5f;
-
-    [Range(0, 1)]
-    public float backgroundIntensity = 1f;
 
     [Range(0, 1)]
     public float foregroundBlend = 0.5f;
@@ -36,7 +30,6 @@ public class TileMap : MonoBehaviour
     public Vector2Int numTiles;
     public Vector2Int mapTextureSize;
     public Texture2D scaledTileAtlas;
-    public RenderTexture loResBackground;
     public RenderTexture loResForeground;
 
     private void Start()
@@ -49,14 +42,9 @@ public class TileMap : MonoBehaviour
         
         //mapTexture = CreateTextureFromCharacterMap(CharacterMapper.testMap);
         //PopulateFromCharacterMap(CharacterMapper.testMap);
-        char[,] charMap = CharacterMapper.FromImage(mapImage);
+        char[,] charMap = CharacterMapper.FromImage(tileTexture);
         mapTexture = CreateTextureFromCharacterMap(charMap);
         PopulateFromCharacterMap(charMap);
-
-        loResBackground = new RenderTexture(numTiles.x, numTiles.y, 1)
-        {
-            filterMode = FilterMode.Point
-        };
 
         loResForeground = new RenderTexture(numTiles.x, numTiles.y, 1)
         {
@@ -64,8 +52,8 @@ public class TileMap : MonoBehaviour
         };
 
         mapTextureRenderer.sprite = Sprite.Create(mapTexture, new Rect(0f, 0f, mapTextureSize.x, mapTextureSize.y), new Vector2(0.5f, 0.5f), pixelsPerUnit);
-        mapTextureRenderer.material.SetTexture("_HiResBackgroundTex", hiResBackground);
-        mapTextureRenderer.material.SetTexture("_LoResBackgroundTex", loResBackground);
+        mapTextureRenderer.material.SetTexture("_HiResBackgroundTex", backgroundTexture);
+        mapTextureRenderer.material.SetTexture("_BackgroundTex", backgroundTexture);
         mapTextureRenderer.material.SetTexture("_HiResForegroundTex", hiResForeground);
         mapTextureRenderer.material.SetTexture("_LoResForegroundTex", loResForeground);
 
@@ -173,13 +161,9 @@ public class TileMap : MonoBehaviour
 
     private void Update()
     {
-        mapTextureRenderer.material.SetFloat("_BackgroundBlend", backgroundBlend);
-        mapTextureRenderer.material.SetFloat("_BackgroundIntensity", backgroundIntensity);
-
         mapTextureRenderer.material.SetFloat("_ForegroundBlend", foregroundBlend);
         mapTextureRenderer.material.SetFloat("_ForegroundIntensity", foregroundIntensity);
 
-        Graphics.Blit(hiResBackground, loResBackground);
         Graphics.Blit(hiResForeground, loResForeground);
     }
 

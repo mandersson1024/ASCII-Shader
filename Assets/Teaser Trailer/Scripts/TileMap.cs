@@ -105,14 +105,10 @@ public class TileMap : MonoBehaviour
 
         Vector2Int[] positions =
         {
-            new Vector2Int(57, 19),
-            new Vector2Int(61, 19),
-            new Vector2Int(61, 20),
-            new Vector2Int(63, 20),
-            new Vector2Int(63, 26),
-            new Vector2Int(55, 26),
-            new Vector2Int(55, 20),
-            new Vector2Int(57, 20),
+            new Vector2Int(47, 23),
+            new Vector2Int(57, 23),
+            new Vector2Int(57, 29),
+            new Vector2Int(47, 29),
         };
 
         int index = 0;

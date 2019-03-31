@@ -32,6 +32,9 @@ public class CharacterMapper
                 if (c == Color.cyan)
                     result[x, y] += '$';
                 else
+                if (c == Color.blue)
+                    result[x, y] += '.';
+                else
                     result[x, y] += ' ';
             }
         }

@@ -7,7 +7,7 @@ public class CharacterMapper
 {
     public static int GetIndex(char c)
     {
-        const string chars = " .-:+=*#%$@";
+        const string chars = " .-:+=*#%$@§¤";
         int index = chars.IndexOf(c);
         return index == -1 ? 0 : index;
     }
@@ -30,7 +30,7 @@ public class CharacterMapper
                     result[x, y] += '*';
                 else
                 if (c == Color.cyan)
-                    result[x, y] += '$';
+                    result[x, y] += '§';
                 else
                 if (c == Color.blue)
                     result[x, y] += '.';

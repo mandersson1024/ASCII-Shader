@@ -490,7 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bbe028f4dc04a442ae745543f72d503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileAtlas: {fileID: 2800000, guid: 0b6ada07b7de3b847bb941d12d2ac41b, type: 3}
+  tileAtlas: {fileID: 2800000, guid: 4bf91f13fbb87fa48ac42c080f2eb4fe, type: 3}
   tileSizePixels: 20
   tileTexture: {fileID: 2800000, guid: 35bfce9ba1333574388778ca234223e2, type: 3}
   tileColorTexture: {fileID: 2800000, guid: 0d80f96ce87380444b51bf01c17575a7, type: 3}

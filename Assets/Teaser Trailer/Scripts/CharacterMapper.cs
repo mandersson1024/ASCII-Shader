@@ -27,7 +27,7 @@ public class CharacterMapper
                     result[x, y] += '#';
                 else
                 if (c == Color.green)
-                    result[x, y] += '*';
+                    result[x, y] += '+';
                 else
                 if (c == Color.cyan)
                     result[x, y] += '§';

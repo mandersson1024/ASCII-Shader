@@ -17,10 +17,10 @@ public class TileMap : MonoBehaviour
     public Texture2D backgroundColorTexture;
     public Material entityMaterial;
 
-    Texture2D mapTexture;
-    SpriteRenderer mapTextureRenderer;
 
     [Header("Debug info")]
+    public SpriteRenderer mapTextureRenderer;
+    public Texture2D mapTexture;
     public Vector2Int numTiles;
     public Vector2Int mapTextureSize;
     public Texture2D scaledTileAtlas;
@@ -32,14 +32,10 @@ public class TileMap : MonoBehaviour
         mapTextureRenderer = GetComponent<SpriteRenderer>();
         scaledTileAtlas = tileAtlas.CloneAndScale(tileSizePixels * 16, tileSizePixels * 16);
         tileset = new Tileset(scaledTileAtlas, tileSizePixels);
-        
+
         //mapTexture = CreateTextureFromCharacterMap(CharacterMapper.testMap);
         //PopulateFromCharacterMap(CharacterMapper.testMap);
-        char[,] charMap = CharacterMapper.FromImage(tileTexture);
-        mapTexture = CreateTextureFromCharacterMap(charMap);
-        PopulateFromCharacterMap(charMap);
-
-        mapTextureRenderer.sprite = Sprite.Create(mapTexture, new Rect(0f, 0f, mapTextureSize.x, mapTextureSize.y), new Vector2(0.5f, 0.5f), pixelsPerUnit);
+        RefreshTileTexture();
         mapTextureRenderer.material.SetTexture("_BackgroundColorTex", backgroundColorTexture);
         mapTextureRenderer.material.SetTexture("_TileColorTex", tileColorTexture);
 
@@ -53,6 +49,15 @@ public class TileMap : MonoBehaviour
         
         //FireEffect();
         //StartCoroutine(GhostWalker());
+    }
+
+    public void RefreshTileTexture()
+    {
+        Debug.Log("RefreshTileTexture");
+        char[,] charMap = CharacterMapper.FromImage(tileTexture);
+        mapTexture = CreateTextureFromCharacterMap(charMap);
+        PopulateFromCharacterMap(charMap);
+        mapTextureRenderer.sprite = Sprite.Create(mapTexture, new Rect(0f, 0f, mapTextureSize.x, mapTextureSize.y), new Vector2(0.5f, 0.5f), pixelsPerUnit);
     }
 
     void FireEffect()
@@ -145,7 +150,7 @@ public class TileMap : MonoBehaviour
         Graphics.CopyTexture(src, 0, 0, 0, 0, src.width, src.height, dst, 0, 0, x, y);
     }
 
-    private Texture2D CreateTextureFromCharacterMap(char[,] characterMap)
+    public Texture2D CreateTextureFromCharacterMap(char[,] characterMap)
     {
         numTiles.x = characterMap.GetLength(0);
         numTiles.y = characterMap.GetLength(1);

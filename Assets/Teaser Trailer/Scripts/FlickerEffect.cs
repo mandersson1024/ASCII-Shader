@@ -30,6 +30,7 @@ public class FlickerEffect : MonoBehaviour
             entity.SetTile(tileset, c);
 
             entity.SetColor(highlight);
+            entity.SetGlow(0.7f);
             lastHighlightTime = Time.time;
             float sleepTime = Random.Range(minIntervalSeconds, maxIntervalSeconds);
 

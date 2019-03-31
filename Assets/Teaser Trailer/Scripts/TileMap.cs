@@ -53,10 +53,33 @@ public class TileMap : MonoBehaviour
 
         // Fire Effect
         Vector2Int[] positions = {
-            new Vector2Int(37, 24),
-            new Vector2Int(37, 25),
-            new Vector2Int(38, 24),
-            new Vector2Int(38, 25),
+            new Vector2Int(63, 13),
+            new Vector2Int(64, 13),
+            new Vector2Int(65, 13),
+            new Vector2Int(66, 13),
+            new Vector2Int(61, 14),
+            new Vector2Int(63, 14),
+            new Vector2Int(64, 14),
+            new Vector2Int(65, 14),
+            new Vector2Int(66, 14),
+            new Vector2Int(60, 15),
+            new Vector2Int(61, 15),
+            new Vector2Int(62, 15),
+            new Vector2Int(63, 15),
+            new Vector2Int(64, 15),
+            new Vector2Int(65, 15),
+            new Vector2Int(66, 15),
+            new Vector2Int(61, 16),
+            new Vector2Int(65, 16),
+            new Vector2Int(61, 17),
+            new Vector2Int(63, 17),
+            new Vector2Int(64, 17),
+            new Vector2Int(65, 17),
+            new Vector2Int(66, 17),
+            new Vector2Int(63, 18),
+            new Vector2Int(64, 18),
+            new Vector2Int(65, 18),
+            new Vector2Int(66, 18),
         };
 
         foreach (Vector2Int pos in positions)
@@ -82,14 +105,14 @@ public class TileMap : MonoBehaviour
 
         Vector2Int[] positions =
         {
-            new Vector2Int(57, 9),
-            new Vector2Int(61, 9),
-            new Vector2Int(61, 10),
-            new Vector2Int(63, 10),
-            new Vector2Int(63, 16),
-            new Vector2Int(55, 16),
-            new Vector2Int(55, 10),
-            new Vector2Int(57, 10),
+            new Vector2Int(57, 19),
+            new Vector2Int(61, 19),
+            new Vector2Int(61, 20),
+            new Vector2Int(63, 20),
+            new Vector2Int(63, 26),
+            new Vector2Int(55, 26),
+            new Vector2Int(55, 20),
+            new Vector2Int(57, 20),
         };
 
         int index = 0;

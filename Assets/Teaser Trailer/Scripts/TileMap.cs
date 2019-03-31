@@ -50,8 +50,13 @@ public class TileMap : MonoBehaviour
         Entity.Create(mapTextureRenderer.transform, entityMaterial, tileset, '*', this, 0, numTiles.y - 1, Color.yellow);
         Entity.Create(mapTextureRenderer.transform, entityMaterial, tileset, '*', this, numTiles.x - 1, numTiles.y - 1, Color.red);
         */
+        
+        //FireEffect();
+        //StartCoroutine(GhostWalker());
+    }
 
-        // Fire Effect
+    void FireEffect()
+    {
         Vector2Int[] positions = {
             new Vector2Int(63, 13),
             new Vector2Int(64, 13),
@@ -88,8 +93,6 @@ public class TileMap : MonoBehaviour
             FlickerEffect fx = e.gameObject.AddComponent<FlickerEffect>();
             fx.tileset = tileset;
         }
-
-        StartCoroutine(GhostWalker());
     }
 
     void PlaceGhost(int x, int y)

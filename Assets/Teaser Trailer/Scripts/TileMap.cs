@@ -195,6 +195,11 @@ public class TileMap : MonoBehaviour
     {
         mapTextureRenderer.material.SetTexture("_BackgroundColorTex", backgroundColorTexture);
         mapTextureRenderer.material.SetTexture("_TileColorTex", generatedColorTexture);
+
+        if (Input.anyKeyDown)
+        {
+            CreateTileTexture();
+        }
     }
 
 }

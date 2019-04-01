@@ -8,7 +8,7 @@ public class TileTexturePostprocessor : AssetPostprocessor
     void OnPostprocessTexture(Texture2D texture)
     {
         TileMap tilemap = GameObject.Find("TileMap").GetComponent<TileMap>();
-        tilemap.RefreshTileTexture();
+        tilemap.CreateTileTexture();
     }
 
 }

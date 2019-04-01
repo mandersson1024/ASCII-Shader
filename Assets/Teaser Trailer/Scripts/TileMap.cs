@@ -13,13 +13,14 @@ public class TileMap : MonoBehaviour
     public Texture2D tileAtlas;
     public int tileSizePixels = 30;
     public Texture2D tileTexture;
-    public Texture2D tileColorTexture;
     public Texture2D backgroundColorTexture;
     public Material entityMaterial;
+    public TileColorMapper tileColorMapper;
 
 
     [Header("Debug info")]
     public SpriteRenderer mapTextureRenderer;
+    public Texture2D generatedColorTexture;
     public Texture2D mapTexture;
     public Vector2Int numTiles;
     public Vector2Int mapTextureSize;
@@ -35,9 +36,9 @@ public class TileMap : MonoBehaviour
 
         //mapTexture = CreateTextureFromCharacterMap(CharacterMapper.testMap);
         //PopulateFromCharacterMap(CharacterMapper.testMap);
-        RefreshTileTexture();
+        CreateTileTexture();
         mapTextureRenderer.material.SetTexture("_BackgroundColorTex", backgroundColorTexture);
-        mapTextureRenderer.material.SetTexture("_TileColorTex", tileColorTexture);
+        mapTextureRenderer.material.SetTexture("_TileColorTex", generatedColorTexture);
 
         // Corners of the map
         /*
@@ -51,11 +52,11 @@ public class TileMap : MonoBehaviour
         //StartCoroutine(GhostWalker());
     }
 
-    public void RefreshTileTexture()
+    public void CreateTileTexture()
     {
-        Debug.Log("RefreshTileTexture");
         char[,] charMap = CharacterMapper.FromImage(tileTexture);
         mapTexture = CreateTextureFromCharacterMap(charMap);
+        generatedColorTexture = CreateColorTextureFromCharacterMap(charMap);
         PopulateFromCharacterMap(charMap);
         mapTextureRenderer.sprite = Sprite.Create(mapTexture, new Rect(0f, 0f, mapTextureSize.x, mapTextureSize.y), new Vector2(0.5f, 0.5f), pixelsPerUnit);
     }
@@ -161,6 +162,17 @@ public class TileMap : MonoBehaviour
         return new Texture2D(mapTextureSize.x, mapTextureSize.y, TextureFormat.RGBA32, false);
     }
 
+    public Texture2D CreateColorTextureFromCharacterMap(char[,] characterMap)
+    {
+        numTiles.x = characterMap.GetLength(0);
+        numTiles.y = characterMap.GetLength(1);
+
+        return new Texture2D(numTiles.x, numTiles.y, TextureFormat.RGBA32, false)
+        {
+            filterMode = FilterMode.Point
+        };
+    }
+
     private void PopulateFromCharacterMap(char[,] characterMap)
     {
         for (int y = 0; y < numTiles.y; ++y)
@@ -170,14 +182,19 @@ public class TileMap : MonoBehaviour
                 char c = characterMap[x,y];
                 int index = CharacterMapper.GetIndex(c);
                 tileset.DrawTile(mapTexture, index, x * tileset.tileSizePixels, mapTextureSize.y - (y + 1) * tileset.tileSizePixels);
+
+                Color color = tileColorMapper.GetTileColor(c);
+                generatedColorTexture.SetPixel(x, mapTextureSize.y - y - 1, color);
             }
         }
+
+        generatedColorTexture.Apply();
     }
 
     private void Update()
     {
         mapTextureRenderer.material.SetTexture("_BackgroundColorTex", backgroundColorTexture);
-        mapTextureRenderer.material.SetTexture("_TileColorTex", tileColorTexture);
+        mapTextureRenderer.material.SetTexture("_TileColorTex", generatedColorTexture);
     }
 
 }

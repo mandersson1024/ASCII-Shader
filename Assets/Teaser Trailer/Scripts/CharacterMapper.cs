@@ -16,26 +16,31 @@ public class CharacterMapper
     {
         char[,] result = new char[image.width, image.height];
 
+        Color pureYellow = new Color(1, 1, 0);
+
         for (int y = 0; y < image.height; ++y)
         {
             for (int x = 0; x < image.width; ++x)
             {
-                Color32 c = image.GetPixel(x, image.height - y - 1);
+                Color c = image.GetPixel(x, image.height - y - 1);
 
                 // todo: this is crude
                 if (c == Color.white)
-                    result[x, y] += '#';
+                    result[x, y] = '#';
                 else
                 if (c == Color.green)
-                    result[x, y] += '+';
+                    result[x, y] = '+';
                 else
                 if (c == Color.cyan)
-                    result[x, y] += '§';
+                    result[x, y] = '§';
                 else
                 if (c == Color.blue)
-                    result[x, y] += '.';
+                    result[x, y] = '.';
                 else
-                    result[x, y] += ' ';
+                if (c == pureYellow)
+                    result[x, y] = ':';
+                else
+                    result[x, y] = ' ';
             }
         }
 

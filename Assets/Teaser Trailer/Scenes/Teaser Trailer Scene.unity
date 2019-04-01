@@ -493,7 +493,7 @@ MonoBehaviour:
   tileAtlas: {fileID: 2800000, guid: 4bf91f13fbb87fa48ac42c080f2eb4fe, type: 3}
   tileSizePixels: 20
   tileTexture: {fileID: 2800000, guid: 35bfce9ba1333574388778ca234223e2, type: 3}
-  backgroundColorTexture: {fileID: 2800000, guid: c6d9dacbd675a3d4da6b98ddd509d131,
+  backgroundColorTexture: {fileID: 2800000, guid: 22442783449a5284ba315ba29007a8b4,
     type: 3}
   entityMaterial: {fileID: 2100000, guid: c80a58627aaacf141baf199d8027c5ad, type: 2}
   tileColorMapper: {fileID: 11400000, guid: a7ccce59bd5372449a1b497e1dd5f886, type: 2}

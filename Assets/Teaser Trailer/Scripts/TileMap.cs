@@ -49,8 +49,8 @@ public class TileMap : MonoBehaviour
         Entity.Create(mapTextureRenderer.transform, entityMaterial, tileset, '*', this, numTiles.x - 1, numTiles.y - 1, Color.red);
         */
         
-        //FireEffect();
-        //StartCoroutine(GhostWalker());
+        FireEffect();
+        StartCoroutine(GhostWalker());
     }
 
     public void CreateTileTexture()

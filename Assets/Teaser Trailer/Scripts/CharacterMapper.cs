@@ -38,7 +38,7 @@ public class CharacterMapper
                     result[x, y] = '.';
                 else
                 if (c == pureYellow)
-                    result[x, y] = ':';
+                    result[x, y] = '-';
                 else
                     result[x, y] = ' ';
             }

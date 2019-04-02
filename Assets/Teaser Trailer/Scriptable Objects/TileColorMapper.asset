@@ -14,21 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colors:
   - chr: 32
-    color: {r: 1, g: 0, b: 1, a: 0}
+    color: {r: 0, g: 0, b: 0, a: 0}
   - chr: 46
-    color: {r: 0.254717, g: 0.254717, b: 0.254717, a: 0}
+    color: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 0}
   - chr: 45
     color: {r: 1, g: 0, b: 1, a: 0}
   - chr: 58
     color: {r: 0.5377358, g: 0.43154147, b: 0.13950695, a: 0}
   - chr: 43
-    color: {r: 0.41362584, g: 0.5188679, b: 0.41963968, a: 0}
+    color: {r: 0.49261305, g: 0.8490566, b: 0.51901627, a: 0}
   - chr: 61
     color: {r: 1, g: 0, b: 1, a: 0}
   - chr: 42
     color: {r: 1, g: 0, b: 1, a: 0}
   - chr: 35
-    color: {r: 0.8962264, g: 0.8139968, b: 0.6468049, a: 0}
+    color: {r: 1, g: 0.8123007, b: 0.3137255, a: 0}
   - chr: 37
     color: {r: 1, g: 0, b: 1, a: 0}
   - chr: 36
@@ -36,6 +36,6 @@ MonoBehaviour:
   - chr: 64
     color: {r: 1, g: 0, b: 1, a: 0}
   - chr: 167
-    color: {r: 0.2985048, g: 0.49056602, b: 0.32355624, a: 0}
+    color: {r: 0.063412234, g: 0.5377358, b: 0.12033112, a: 0}
   - chr: 164
     color: {r: 1, g: 0, b: 1, a: 0}

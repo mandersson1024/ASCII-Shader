@@ -13,9 +13,11 @@ public class TileMap : MonoBehaviour
     public Texture2D tileAtlas;
     public int tileSizePixels = 30;
     public Texture2D tileTexture;
-    public Texture2D backgroundColorTexture;
     public Material entityMaterial;
     public TileColorMapper tileColorMapper;
+
+    [Range(0, 1)]
+    public float glow;
 
 
     [Header("Debug info")]
@@ -37,7 +39,6 @@ public class TileMap : MonoBehaviour
         //mapTexture = CreateTextureFromCharacterMap(CharacterMapper.testMap);
         //PopulateFromCharacterMap(CharacterMapper.testMap);
         CreateTileTexture();
-        mapTextureRenderer.material.SetTexture("_BackgroundColorTex", backgroundColorTexture);
         mapTextureRenderer.material.SetTexture("_TileColorTex", generatedColorTexture);
 
         // Corners of the map
@@ -193,7 +194,7 @@ public class TileMap : MonoBehaviour
 
     private void Update()
     {
-        mapTextureRenderer.material.SetTexture("_BackgroundColorTex", backgroundColorTexture);
+        mapTextureRenderer.material.SetFloat("_Glow", glow);
         mapTextureRenderer.material.SetTexture("_TileColorTex", generatedColorTexture);
 
         if (Input.anyKeyDown)

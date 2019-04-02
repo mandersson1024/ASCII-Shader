@@ -4,7 +4,7 @@
     {
 		_MainTex("Raw Tile Texture", 2D) = "white" {}
 		_TileColorTex("Tile Color Texture", 2D) = "white" {}
-		_BackgroundColorTex("Background Color Texture", 2D) = "white" {}
+		_Glow("Glow", Range(0.0, 1.0)) = 0.5
 	}
     SubShader
     {
@@ -35,7 +35,7 @@
 
 			sampler2D _MainTex;
 			sampler2D _TileColorTex;
-			sampler2D _BackgroundColorTex;
+			fixed _Glow;
 
             v2f vert (appdata v)
             {
@@ -49,7 +49,7 @@
             {
 				fixed4 rawTileCol = tex2D(_MainTex, i.uv);
 				fixed4 tileCol = tex2D(_TileColorTex, i.uv);
-				fixed4 bgCol = tex2D(_BackgroundColorTex, i.uv);
+				fixed4 bgCol = tileCol * _Glow;
 
 				fixed4 col = lerp(bgCol, tileCol, rawTileCol);
 				
